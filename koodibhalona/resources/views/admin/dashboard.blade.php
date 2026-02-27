@@ -5,7 +5,7 @@
 
 @section('content')
 <!-- Stats -->
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
     <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
         <div class="flex items-center justify-between mb-4">
             <div class="p-3 bg-amber-100 text-amber-600 rounded-xl">
@@ -32,15 +32,6 @@
         </div>
         <h4 class="text-gray-500 text-sm font-medium uppercase tracking-wider">Slides</h4>
         <p class="text-3xl font-bold text-gray-900">{{ $stats['slides'] }}</p>
-    </div>
-    <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
-        <div class="flex items-center justify-between mb-4">
-            <div class="p-3 bg-purple-100 text-purple-600 rounded-xl">
-                <i data-lucide="credit-card" class="w-6 h-6"></i>
-            </div>
-        </div>
-        <h4 class="text-gray-500 text-sm font-medium uppercase tracking-wider">Plans</h4>
-        <p class="text-3xl font-bold text-gray-900">{{ $stats['plans'] }}</p>
     </div>
 </div>
 

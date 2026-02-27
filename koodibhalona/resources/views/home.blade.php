@@ -100,18 +100,14 @@
             </div>
 
             <!-- Right Side: List of Objectives -->
-            <div class="mt-12 lg:mt-0 h-full">
-                <div class="bg-white rounded-[22px] shadow-[0_10px_30px_rgba(15,23,42,0.08)] border border-[#eaeaea] p-6 sm:p-8 lg:p-10 h-full flex flex-col">
-                    <h3 class="text-2xl font-bold font-serif text-slate-900 mb-6 border-b border-gray-100 pb-4">Our Key Focus Areas</h3>
-                    <div class="space-y-3 flex-grow">
-                        @foreach($objective->list_items as $index => $item)
-                        <div class="flex items-center gap-4 p-3.5 px-4 rounded-[14px] bg-transparent hover:bg-[#fffaf0] border border-transparent hover:border-[#f3e3b3] transition-all duration-300 group cursor-default">
-                            <div class="w-8 h-8 rounded-full bg-[#faedd2] flex items-center justify-center shrink-0 shadow-sm border border-[#e8d5a8]">
-                                <i data-lucide="star" class="w-4 h-4 text-[#dda928] fill-current"></i>
-                            </div>
-                            <div class="flex-grow">
-                                <p class="text-slate-700 font-medium leading-[1.6] group-hover:text-slate-900 transition-colors">{{ $item }}</p>
-                            </div>
+            <div class="mt-12 lg:mt-0">
+                <div class="bg-white rounded-[22px] shadow-[0_10px_30px_rgba(15,23,42,0.08)] border border-[#eaeaea] p-6 sm:p-8 lg:p-10 flex flex-col">
+                    <h3 class="text-2xl font-bold font-serif text-slate-900 mb-4 border-b border-gray-100 pb-3">Our Key Focus Areas</h3>
+                    <div class="divide-y divide-gray-100">
+                        @foreach(array_slice($objective->list_items, 0, 8) as $index => $item)
+                        <div class="flex items-start gap-3 py-3 group cursor-default">
+                            <span class="text-amber-500 font-bold text-lg leading-tight mt-0.5">›</span>
+                            <p class="text-slate-700 font-medium leading-relaxed group-hover:text-slate-900 transition-colors">{{ $item }}</p>
                         </div>
                         @endforeach
                     </div>

@@ -286,6 +286,7 @@
 
 <script>
     window.customTranslationsMapping = @json($translations);
+    window.lastTranslationUpdate = Date.now();
 
     function applyCustomTranslations() {
         const map = window.customTranslationsMapping || {};
@@ -340,7 +341,34 @@
     });
 
     observer.observe(document.body, { childList: true, subtree: true, characterData: true });
+    // Check for translation updates every 30 seconds
+    async function checkForTranslationUpdates() {
+        try {
+            const response = await fetch('/api/translations/check-updates?since=' + window.lastTranslationUpdate);
+            if (response.ok) {
+                const data = await response.json();
+                if (data.hasUpdates) {
+                    // Fetch new translations
+                    const transResponse = await fetch('/api/translations');
+                    if (transResponse.ok) {
+                        const newTranslations = await transResponse.json();
+                        window.customTranslationsMapping = newTranslations;
+                        window.lastTranslationUpdate = Date.now();
+                        // Re-apply translations to current page
+                        applyCustomTranslations();
+                        console.log('Translations updated dynamically');
+                    }
+                }
+            }
+        } catch (error) {
+            console.log('Translation update check failed:', error);
+        }
+    }
+
     setTimeout(applyCustomTranslations, 500);
+    
+    // Start periodic checks
+    setInterval(checkForTranslationUpdates, 30000); // Check every 30 seconds
 </script>
 </body>
 </html>

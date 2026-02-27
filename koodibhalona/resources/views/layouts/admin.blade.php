@@ -46,9 +46,6 @@
                     <i data-lucide="settings" class="w-5 h-5 mr-3"></i> Settings
                 </a>
                 <div class="pt-4 border-t border-slate-800 mt-4 space-y-2">
-                    <a href="{{ route('home') }}" target="_blank" class="flex items-center p-3 rounded-lg hover:bg-slate-800 transition-colors text-slate-400">
-                        <i data-lucide="external-link" class="w-5 h-5 mr-3"></i> View Website
-                    </a>
                     <form action="{{ route('admin.logout') }}" method="POST">
                         @csrf
                         <button type="submit" class="w-full flex items-center p-3 rounded-lg hover:bg-red-900/30 transition-colors text-red-400">

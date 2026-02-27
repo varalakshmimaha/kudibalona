@@ -75,7 +75,7 @@
                 <span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-16 h-1 bg-amber-500 rounded-full"></span>
             </h2>
             <p class="text-lg text-slate-700 leading-relaxed">
-                {{ \App\Models\SiteSetting::get('about_founder_intro', 'Myself introduce koodibalona trust and sanatana gnana Kirana trust founder president Master Of Art. Karnataka India and practicing , lecturer Advocate and legal consultant social worker and environmentalist and actor director producer. And artist. State level winner clay modelling, mimicry,drawing college art, modelling wedding photographer videographer, research work script writer Sports. Event organiser ,ete. Diploma certificate course of animal husbandry. Photography. Screen printing. Ete.') }}
+                {{ \App\Models\SiteSetting::get('about_founder_intro', 'Founder Self Introduction : Myself introduce 👍🏿 koodibalona trust and sanatana gnana Kirana trust founder president👌🏿 Master Of Art. Karnataka India and practicing , lecturer Advocate and legal consultant social worker and environmentalist👍🏿 and actor director producer. And artist. State level winner 👍🏿clay modelling, mimicry,drawing college art, modelling wedding photographer videographer, research work script writer Sports. Event organiser ,ete. Diploma certificate course of animal husbandry. Photography. Screen printing. Ete.') }}
             </p>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto px-4 mb-20">
@@ -102,7 +102,7 @@
             </div>
             <h3 class="text-2xl md:text-3xl font-bold mb-8 italic">"{{ \App\Models\SiteSetting::get('about_founder_quote', 'My trust Moto is love all server all. Leave together.') }}"</h3>
             <p class="text-amber-50 leading-relaxed text-lg max-w-3xl mx-auto">
-                {{ \App\Models\SiteSetting::get('about_founder_quote_desc', 'Supporting disable person women empowerment, trainings, all type of for the development of poor and other persons, self help groups, matrimonial, real estate, construction and developments, support to the all religions people in worldwide. Etc') }}
+                {{ \App\Models\SiteSetting::get('about_founder_quote_desc', 'My trust Moto is love all server all. Leave together. Supporting disable person women empowerment, trainings, all type of for the development of poor and other persons, self help groups, matrimonial, real estate, construction and developments, support to the all religions people in worldwide. Etc') }}
             </p>
         </div>
     </section>

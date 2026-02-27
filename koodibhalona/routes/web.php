@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
+use App\Models\CustomTranslation;
 
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\AdminController;
@@ -67,3 +69,24 @@ Route::prefix('admin')->middleware(AdminAuth::class)->group(function() {
         'destroy' => 'admin.teams.destroy',
     ]);
 });
+
+// API Routes for Dynamic Translations (No Authentication Required)
+Route::get('/api/translations', function() {
+    return CustomTranslation::where('is_hidden', false)
+        ->pluck('kannada_word', 'english_word')
+        ->toArray();
+})->name('api.translations');
+
+Route::get('/api/translations/check-updates', function(Request $request) {
+    $since = $request->query('since', 0);
+    $latest = CustomTranslation::where('is_hidden', false)
+        ->latest('updated_at')
+        ->first();
+    
+    $hasUpdates = $latest && strtotime($latest->updated_at) > ($since / 1000);
+    
+    return response()->json([
+        'hasUpdates' => $hasUpdates,
+        'lastUpdate' => $latest ? strtotime($latest->updated_at) * 1000 : 0
+    ]);
+})->name('api.translations.check');
