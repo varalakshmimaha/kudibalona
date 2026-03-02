@@ -40,19 +40,34 @@
             -webkit-text-fill-color: transparent;
         }
 
-        /* Correctly hide Google Translate Top Bar */
-        .goog-te-banner-frame.skiptranslate, 
-        .goog-te-banner-frame, 
+        /* Hide Google Translate top bar/tooltips while keeping translation behavior */
+        .goog-te-banner-frame.skiptranslate,
+        .goog-te-banner-frame,
+        iframe.goog-te-banner-frame,
         #goog-gt-tt,
-        .goog-te-balloon-frame { 
-            display: none !important; 
+        .goog-te-balloon-frame,
+        .goog-tooltip,
+        .goog-text-highlight,
+        body > .skiptranslate {
+            display: none !important;
+            visibility: hidden !important;
         }
-        
-        body { top: 0px !important; }
-        
-        /* Hide default Google Translate widget */
-        #google_translate_element { position: absolute !important; width: 1px !important; height: 1px !important; overflow: hidden !important; clip: rect(1px, 1px, 1px, 1px) !important; opacity: 0 !important; }
-        .goog-te-banner-frame, #goog-gt-tt, .goog-te-balloon-frame { display: none !important; }
+
+        html, body {
+            top: 0 !important;
+            margin-top: 0 !important;
+        }
+
+        /* Keep default Google widget mounted but invisible */
+        #google_translate_element {
+            position: absolute !important;
+            width: 1px !important;
+            height: 1px !important;
+            overflow: hidden !important;
+            clip: rect(1px, 1px, 1px, 1px) !important;
+            opacity: 0 !important;
+            pointer-events: none !important;
+        }
         .goog-te-gadget { font-size: 0 !important; }
 
         .language-float {
@@ -60,52 +75,102 @@
             right: 14px;
             bottom: 20px;
             z-index: 80;
-            display: flex;
-            flex-direction: column;
+            min-width: 96px;
+        }
+        .language-float-toggle {
+            width: 100%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: space-between;
             gap: 10px;
-            padding: 10px;
-            background: rgba(255, 255, 255, 0.95);
+            padding: 9px 12px;
+            border-radius: 9999px;
+            border: 1px solid #f59e0b;
+            background: linear-gradient(180deg, #ffffff 0%, #fff7ed 100%);
+            color: #0f172a;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            cursor: pointer;
+            box-shadow: 0 8px 22px rgba(15, 23, 42, 0.16);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+        .language-float-toggle:hover {
+            transform: translateY(-1px);
+            border-color: #d97706;
+            box-shadow: 0 12px 26px rgba(15, 23, 42, 0.18);
+        }
+        .language-float-toggle:focus-visible {
+            outline: 2px solid #f59e0b;
+            outline-offset: 2px;
+        }
+        .language-toggle-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            line-height: 1;
+        }
+        .language-globe {
+            width: 16px;
+            height: 16px;
+            color: #b45309;
+            flex-shrink: 0;
+        }
+        .language-caret {
+            font-size: 10px;
+            transition: transform 0.2s ease;
+            color: #92400e;
+        }
+        .language-float.open .language-caret {
+            transform: rotate(180deg);
+        }
+        .language-dropdown {
+            position: absolute;
+            right: 0;
+            bottom: calc(100% + 10px);
+            width: 170px;
+            padding: 8px;
+            border-radius: 12px;
             border: 1px solid #fde68a;
-            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.98);
             box-shadow: 0 12px 30px rgba(15, 23, 42, 0.15);
             backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
         }
-        .language-float-btn {
-            width: 38px;
-            height: 38px;
-            border-radius: 9999px;
-            border: 2px solid transparent;
-            padding: 0;
-            background: transparent;
-            overflow: hidden;
-            cursor: pointer;
-            transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
-            box-shadow: 0 3px 10px rgba(15, 23, 42, 0.12);
-        }
-        .language-float-btn:hover {
-            transform: translateY(-2px) scale(1.04);
-        }
-        .language-float-btn.active {
-            border-color: #f59e0b;
-            box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.28), 0 3px 10px rgba(15, 23, 42, 0.15);
-        }
-        .language-float-btn img {
+        .language-option {
             width: 100%;
-            height: 100%;
-            object-fit: cover;
             display: block;
+            text-align: left;
+            border: 0;
+            border-radius: 8px;
+            background: transparent;
+            color: #0f172a;
+            padding: 8px 10px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+        }
+        .language-option:hover {
+            background: #f8fafc;
+        }
+        .language-option.active {
+            background: #fff7ed;
+            color: #b45309;
+            font-weight: 700;
         }
         @media (max-width: 640px) {
             .language-float {
                 right: 10px;
                 bottom: 12px;
-                padding: 8px;
-                gap: 8px;
+                min-width: 92px;
             }
-            .language-float-btn {
-                width: 34px;
-                height: 34px;
+            .language-dropdown {
+                width: 154px;
+            }
+            .language-float-toggle {
+                padding: 8px 11px;
             }
         }
     </style>
@@ -258,23 +323,25 @@
         </footer>
     </div>
 
-    <!-- Floating Language Icons -->
-    <div class="language-float" aria-label="Language Switcher">
-        <button type="button" class="language-float-btn" onclick="setLanguage('en')" data-lang="en" title="English">
-            <img src="{{ asset('images/lang/en.svg') }}" alt="English">
+    <!-- Language Switcher -->
+    <div class="language-float notranslate" id="language-switcher" aria-label="Language Switcher" translate="no">
+        <button type="button" class="language-float-toggle" id="language-toggle-btn" aria-haspopup="true" aria-expanded="false" aria-controls="language-dropdown">
+            <span class="language-toggle-label">
+                <svg class="language-globe" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/>
+                    <path d="M3 12H21M12 3C14.6 5.4 14.6 18.6 12 21M12 3C9.4 5.4 9.4 18.6 12 21" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+                </svg>
+                <span id="language-current-code">ENG</span>
+            </span>
+            <span class="language-caret" aria-hidden="true">▼</span>
         </button>
-        <button type="button" class="language-float-btn" onclick="setLanguage('kn')" data-lang="kn" title="Kannada">
-            <img src="{{ asset('images/lang/kn.svg') }}" alt="Kannada">
-        </button>
-        <button type="button" class="language-float-btn" onclick="setLanguage('hi')" data-lang="hi" title="Hindi">
-            <img src="{{ asset('images/lang/hi.svg') }}" alt="Hindi">
-        </button>
-        <button type="button" class="language-float-btn" onclick="setLanguage('te')" data-lang="te" title="Telugu">
-            <img src="{{ asset('images/lang/te.svg') }}" alt="Telugu">
-        </button>
-        <button type="button" class="language-float-btn" onclick="setLanguage('ta')" data-lang="ta" title="Tamil">
-            <img src="{{ asset('images/lang/ta.svg') }}" alt="Tamil">
-        </button>
+        <div class="language-dropdown hidden" id="language-dropdown" role="menu">
+            <button type="button" class="language-option" onclick="setLanguage('en')" data-lang="en" role="menuitem">ENG</button>
+            <button type="button" class="language-option" onclick="setLanguage('kn')" data-lang="kn" role="menuitem">KAN</button>
+            <button type="button" class="language-option" onclick="setLanguage('hi')" data-lang="hi" role="menuitem">HIN</button>
+            <button type="button" class="language-option" onclick="setLanguage('te')" data-lang="te" role="menuitem">TEL</button>
+            <button type="button" class="language-option" onclick="setLanguage('ta')" data-lang="ta" role="menuitem">TAM</button>
+        </div>
     </div>
 
     <!-- Google Translate Script -->
@@ -370,9 +437,96 @@
         });
 
         // ── Language Switcher ──────────────────────────────────────
-        function updateLanguageIcons(lang) {
-            document.querySelectorAll('.language-float-btn').forEach(btn => {
-                btn.classList.toggle('active', btn.dataset.lang === lang);
+        const LANGUAGE_LABELS = {
+            en: 'ENG',
+            kn: 'KAN',
+            hi: 'HIN',
+            te: 'TEL',
+            ta: 'TAM'
+        };
+
+        function getCookieValue(name) {
+            const match = document.cookie.match(new RegExp('(?:^|; )' + name + '=([^;]*)'));
+            return match ? decodeURIComponent(match[1]) : '';
+        }
+
+        function getSavedLanguage() {
+            const local = localStorage.getItem('site_lang');
+            if (local && LANGUAGE_LABELS[local]) return local;
+
+            const siteLang = getCookieValue('site_lang');
+            if (siteLang && LANGUAGE_LABELS[siteLang]) return siteLang;
+
+            const goog = getCookieValue('googtrans');
+            if (goog) {
+                const parts = goog.split('/');
+                const lang = parts[2] || '';
+                if (lang && LANGUAGE_LABELS[lang]) return lang;
+            }
+
+            return 'en';
+        }
+
+        function updateLanguageUI(lang) {
+            document.querySelectorAll('.language-option').forEach(option => {
+                option.classList.toggle('active', option.dataset.lang === lang);
+            });
+            const currentCode = document.getElementById('language-current-code');
+            if (currentCode) {
+                currentCode.textContent = LANGUAGE_LABELS[lang] || 'ENG';
+            }
+        }
+
+        function initLanguageDropdown() {
+            const wrapper = document.getElementById('language-switcher');
+            const toggleBtn = document.getElementById('language-toggle-btn');
+            const dropdown = document.getElementById('language-dropdown');
+
+            if (!wrapper || !toggleBtn || !dropdown || wrapper.dataset.initialized === '1') {
+                return;
+            }
+            wrapper.dataset.initialized = '1';
+
+            function closeDropdown() {
+                wrapper.classList.remove('open');
+                dropdown.classList.add('hidden');
+                toggleBtn.setAttribute('aria-expanded', 'false');
+            }
+
+            toggleBtn.addEventListener('click', function(event) {
+                event.stopPropagation();
+                const isOpen = !dropdown.classList.contains('hidden');
+                if (isOpen) {
+                    closeDropdown();
+                } else {
+                    wrapper.classList.add('open');
+                    dropdown.classList.remove('hidden');
+                    toggleBtn.setAttribute('aria-expanded', 'true');
+                }
+            });
+
+            document.addEventListener('click', function(event) {
+                if (!wrapper.contains(event.target)) {
+                    closeDropdown();
+                }
+            });
+
+            document.addEventListener('keydown', function(event) {
+                if (event.key === 'Escape') {
+                    closeDropdown();
+                }
+            });
+        }
+
+        function hideGoogleTranslateChrome() {
+            document.body.style.top = '0px';
+            document.documentElement.style.top = '0px';
+
+            document.querySelectorAll(
+                '.goog-te-banner-frame, iframe.goog-te-banner-frame, .goog-te-balloon-frame, #goog-gt-tt, .goog-tooltip, .goog-text-highlight, body > .skiptranslate'
+            ).forEach(function(node) {
+                node.style.display = 'none';
+                node.style.visibility = 'hidden';
             });
         }
 
@@ -390,17 +544,32 @@
                 document.cookie = "googtrans=/en/" + lang + "; path=/; domain=" + window.location.hostname;
             }
 
+            updateLanguageUI(lang);
+            hideGoogleTranslateChrome();
+
             // Reload to apply language from a clean DOM state
             window.location.reload();
         }
 
         // Restore saved language on page load gracefully
-        window.addEventListener('scroll', function() { /* dummy to trigger event loop if needed */ });
         setTimeout(function() {
-            var saved = localStorage.getItem('site_lang') || 'en';
+            var saved = getSavedLanguage();
             window.currentLanguage = saved;
-            updateLanguageIcons(saved);
+            updateLanguageUI(saved);
+            initLanguageDropdown();
+            hideGoogleTranslateChrome();
         }, 50);
+
+        window.addEventListener('load', function() {
+            hideGoogleTranslateChrome();
+            setTimeout(hideGoogleTranslateChrome, 300);
+            setTimeout(hideGoogleTranslateChrome, 1200);
+        });
+
+        const gtUiObserver = new MutationObserver(function() {
+            hideGoogleTranslateChrome();
+        });
+        gtUiObserver.observe(document.documentElement, { childList: true, subtree: true, attributes: true, attributeFilter: ['style', 'class'] });
     </script>
 
     {{-- Kannada brand-name correction: runs after Google Translate may have altered the DOM --}}
