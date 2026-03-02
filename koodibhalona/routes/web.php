@@ -71,11 +71,24 @@ Route::prefix('admin')->middleware(AdminAuth::class)->group(function() {
 });
 
 // API Routes for Dynamic Translations (No Authentication Required)
-Route::get('/api/translations', function() {
-    return CustomTranslation::where('is_hidden', false)
-        ->pluck('kannada_word', 'english_word')
-        ->toArray();
+Route::get('/api/translations', function(Request $request) {
+    $lang = $request->query('lang', 'kn');
+    return \App\Models\CustomTranslation::forLanguage($lang);
 })->name('api.translations');
+
+Route::get('/api/translations/all', function() {
+    $rows = CustomTranslation::where('is_hidden', false)->get();
+    $result = [];
+    foreach ($rows as $row) {
+        $result[$row->english_word] = [
+            'kn' => $row->kannada_word,
+            'te' => $row->telugu_word,
+            'hi' => $row->hindi_word,
+            'ta' => $row->tamil_word,
+        ];
+    }
+    return response()->json($result);
+})->name('api.translations.all');
 
 Route::get('/api/translations/check-updates', function(Request $request) {
     $since = $request->query('since', 0);

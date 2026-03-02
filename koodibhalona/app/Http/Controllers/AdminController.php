@@ -28,6 +28,7 @@ class AdminController extends Controller {
             'quote_text' => SiteSetting::get('quote_text'),
             'footer_about' => SiteSetting::get('footer_about'),
             'site_logo' => SiteSetting::get('site_logo'),
+            'home_banner_image' => SiteSetting::get('home_banner_image'),
         ];
         return view('admin.settings', compact('settings'));
     }
@@ -44,6 +45,10 @@ class AdminController extends Controller {
         if ($request->hasFile('site_logo')) {
             $logoPath = $request->file('site_logo')->store('site', 'public');
             SiteSetting::set('site_logo', $logoPath);
+        }
+        if ($request->hasFile('home_banner_image')) {
+            $homeBannerPath = $request->file('home_banner_image')->store('site', 'public');
+            SiteSetting::set('home_banner_image', $homeBannerPath);
         }
 
         $contact = ContactInfo::first();
@@ -69,6 +74,7 @@ class AdminController extends Controller {
             'about_santana_desc1' => SiteSetting::get('about_santana_desc1'),
             'about_santana_desc2' => SiteSetting::get('about_santana_desc2'),
             'about_santana_image' => SiteSetting::get('about_santana_image'),
+            'about_banner_image' => SiteSetting::get('about_banner_image'),
             'about_founder_intro' => SiteSetting::get('about_founder_intro'),
             'about_founder_photo1' => SiteSetting::get('about_founder_photo1'),
             'about_founder_photo2' => SiteSetting::get('about_founder_photo2'),
@@ -93,7 +99,7 @@ class AdminController extends Controller {
             }
         }
 
-        $imageKeys = ['about_santana_image', 'about_founder_photo1', 'about_founder_photo2'];
+        $imageKeys = ['about_banner_image', 'about_santana_image', 'about_founder_photo1', 'about_founder_photo2'];
         foreach ($imageKeys as $key) {
             if ($request->hasFile($key)) {
                 $path = $request->file($key)->store('about', 'public');
@@ -105,42 +111,55 @@ class AdminController extends Controller {
     }
 
     public function translations() {
-        $translations = CustomTranslation::orderBy('created_at', 'desc')->get();
-        return view('admin.translations', compact('translations'));
+        $translations = CustomTranslation::orderBy('category')->orderBy('english_word')->get();
+        $languages = \App\Models\CustomTranslation::$languages;
+        $categories = CustomTranslation::distinct()->pluck('category')->filter()->values();
+        return view('admin.translations', compact('translations', 'languages', 'categories'));
     }
 
     public function translationsStore(Request $request) {
         $data = $request->validate([
-            'english_word' => 'required|string|max:255',
-            'kannada_word' => 'required|string|max:255',
+            'english_word'  => 'required|string|max:500',
+            'kannada_word'  => 'nullable|string|max:500',
+            'telugu_word'   => 'nullable|string|max:500',
+            'hindi_word'    => 'nullable|string|max:500',
+            'tamil_word'    => 'nullable|string|max:500',
+            'category'      => 'nullable|string|max:100',
+            'description'   => 'nullable|string|max:500',
         ]);
-        
+
+        if (empty($data['category'])) $data['category'] = 'general';
         CustomTranslation::create($data);
-        return back()->with('success', 'Translation override added successfully.');
+        return back()->with('success', 'Translation keyword added successfully.');
     }
 
     public function translationsUpdate(Request $request, $id) {
         $data = $request->validate([
-            'english_word' => 'required|string|max:255',
-            'kannada_word' => 'required|string|max:255',
+            'english_word'  => 'required|string|max:500',
+            'kannada_word'  => 'nullable|string|max:500',
+            'telugu_word'   => 'nullable|string|max:500',
+            'hindi_word'    => 'nullable|string|max:500',
+            'tamil_word'    => 'nullable|string|max:500',
+            'category'      => 'nullable|string|max:100',
+            'description'   => 'nullable|string|max:500',
         ]);
-        
+
+        if (empty($data['category'])) $data['category'] = 'general';
         CustomTranslation::findOrFail($id)->update($data);
-        return back()->with('success', 'Translation override updated.');
+        return back()->with('success', 'Translation keyword updated successfully.');
     }
 
     public function translationsToggle($id) {
         $translation = CustomTranslation::findOrFail($id);
         $translation->is_hidden = !$translation->is_hidden;
         $translation->save();
-        
-        $msg = $translation->is_hidden ? 'Translation hidden.' : 'Translation unhidden.';
+        $msg = $translation->is_hidden ? 'Keyword hidden.' : 'Keyword activated.';
         return back()->with('success', $msg);
     }
 
     public function translationsDestroy($id) {
         CustomTranslation::findOrFail($id)->delete();
-        return back()->with('success', 'Translation override removed.');
+        return back()->with('success', 'Translation keyword removed.');
     }
 
     public function objectives() {

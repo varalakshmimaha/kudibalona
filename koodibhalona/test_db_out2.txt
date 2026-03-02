@@ -1,0 +1,24 @@
+ID: 1
+EN: [Koodibhalona]
+KN: [ಕೂಡಿಬಾಳೋಣ]
+-----------------
+ID: 2
+EN: [Koodibhalona]
+KN: [ಕೂಡಿಬಾಳೋಣ]
+-----------------
+ID: 5
+EN: [Koodibhalona]
+KN: [ಕೂಡಿಬಾಳೋಣ]
+-----------------
+ID: 34
+EN: [Koodibhalona Trust (R) and Sanatana Gnayna Kirana (R)]
+KN: [ಕೂಡಿಬಾಳೋಣ ಟ್ರಸ್ಟ್ (ರಿ) ಮತ್ತು ಸನಾತನ ಜ್ಞಾನ ಕಿರಣ (ರಿ)]
+-----------------
+ID: 37
+EN: [Koodibhalona Trust (R)]
+KN: [ಕೂಡಿಬಾಳೋಣ ಟ್ರಸ್ಟ್ (ರಿ)]
+-----------------
+ID: 38
+EN: [Welcome to Koodibhalona Trust (R) and Sanatana Gnayna Kirana (R)]
+KN: [ಕೂಡಿಬಾಳೋಣ ಟ್ರಸ್ಟ್ (ರಿ) ಮತ್ತು ಸನಾತನ ಜ್ಞಾನ ಕಿರಣ (ರಿ) ಗೆ ಸ್ವಾಗತ]
+-----------------

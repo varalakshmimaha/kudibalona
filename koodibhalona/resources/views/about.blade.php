@@ -3,27 +3,25 @@
 @section('title', 'About Us')
 
 @section('content')
-<!-- Header Section -->
-<div class="bg-white py-16 text-center">
-    <h1 class="text-4xl md:text-5xl font-bold text-slate-800 mb-4">About Us</h1>
-    <nav class="flex justify-center items-center gap-2 text-sm font-medium">
-        <a href="{{ route('home') }}" class="text-amber-600 hover:text-amber-700">Home</a>
-        <span class="text-slate-400">/</span>
-        <a href="{{ route('contact') }}" class="text-amber-600 hover:text-amber-700">Contact us</a>
-        <span class="text-slate-400">/</span>
-        <span class="text-slate-500">About us</span>
-    </nav>
-</div>
+@php $aboutBanner = \App\Models\SiteSetting::get('about_banner_image'); @endphp
 
-<!-- Main Banner -->
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 mb-20">
-    <div class="rounded-3xl overflow-hidden shadow-2xl h-[300px] md:h-[450px]">
-        <img src="https://images.unsplash.com/photo-1593113598332-cd288d649433?ixlib=rb-4.0.3&auto=format&fit=crop&w=1740&q=80" alt="Community Support" class="w-full h-full object-cover">
+<!-- Page Header with Background Image -->
+<div class="relative py-24 bg-slate-900 overflow-hidden">
+    <div class="absolute inset-0">
+        <img src="{{ $aboutBanner ? asset('storage/' . $aboutBanner) : 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?ixlib=rb-4.0.3&auto=format&fit=crop&w=1740&q=80' }}" alt="About Us Banner" class="w-full h-full object-cover opacity-40">
+        <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40"></div>
+    </div>
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-10">
+        <h1 class="text-4xl md:text-6xl font-bold text-white mb-6 font-serif">About Us</h1>
+        <nav class="flex justify-center items-center gap-3 text-sm font-bold tracking-widest uppercase text-white/80">
+            <a href="{{ route('home') }}" class="hover:text-amber-400 transition-colors">HOME</a>
+            <span class="text-white/40">/</span>
+            <span class="text-amber-500">ABOUT US</span>
+        </nav>
     </div>
 </div>
 
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-32 mb-24">
-    <!-- About Koodibhalona Trust Section -->
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 space-y-24">
     <section class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
         <div class="relative">
             <div class="rounded-2xl overflow-hidden shadow-xl border-4 border-white">
@@ -144,20 +142,28 @@
     @endif
 
     <!-- Vision & Mission -->
-    <section class="grid grid-cols-1 md:grid-cols-2 gap-12 pt-16 border-t border-slate-100">
-        <div class="flex flex-col items-center text-center p-12 rounded-[2.5rem] bg-white border border-slate-200 group transition-all hover:shadow-xl hover:-translate-y-2">
-            <div class="w-20 h-20 rounded-2xl bg-white shadow-lg flex items-center justify-center mb-8">
-                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-amber-500"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/><circle cx="12" cy="12" r="3"/></svg>
-            </div>
-            <h3 class="text-2xl font-bold text-slate-900 mb-6">Vision</h3>
-            <p class="text-slate-600 leading-relaxed">{{ \App\Models\SiteSetting::get('about_vision', 'A society where every individual has access to education, healthcare, equality, and opportunities to thrive with dignity.') }}</p>
+    <section class="pt-16 border-t border-slate-100">
+        <div class="text-center max-w-4xl mx-auto mb-16 px-4">
+            <h2 class="text-3xl font-bold text-slate-900 mb-8 pb-4 relative inline-block">
+                Vision & Mission
+                <span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-16 h-1 bg-amber-500 rounded-full"></span>
+            </h2>
         </div>
-        <div class="flex flex-col items-center text-center p-12 rounded-[2.5rem] bg-white border border-slate-200 group transition-all hover:shadow-xl hover:-translate-y-2">
-            <div class="w-20 h-20 rounded-2xl bg-white shadow-lg flex items-center justify-center mb-8">
-                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-amber-500"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+            <div class="flex flex-col items-center text-center p-12 rounded-[2.5rem] bg-white border border-slate-200 group transition-all hover:shadow-xl hover:-translate-y-2">
+                <div class="w-20 h-20 rounded-2xl bg-white shadow-lg flex items-center justify-center mb-8">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-amber-500"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/><circle cx="12" cy="12" r="3"/></svg>
+                </div>
+                <h3 class="text-2xl font-bold text-slate-900 mb-6">Vision</h3>
+                <p class="text-slate-600 leading-relaxed">{{ \App\Models\SiteSetting::get('about_vision', 'A society where every individual has access to education, healthcare, equality, and opportunities to thrive with dignity.') }}</p>
             </div>
-            <h3 class="text-2xl font-bold text-slate-900 mb-6">Mission</h3>
-            <p class="text-slate-600 leading-relaxed">{{ \App\Models\SiteSetting::get('about_mission', 'Empower communities through education, health, welfare, and environmental programs, creating lasting impact.') }}</p>
+            <div class="flex flex-col items-center text-center p-12 rounded-[2.5rem] bg-white border border-slate-200 group transition-all hover:shadow-xl hover:-translate-y-2">
+                <div class="w-20 h-20 rounded-2xl bg-white shadow-lg flex items-center justify-center mb-8">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-amber-500"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+                </div>
+                <h3 class="text-2xl font-bold text-slate-900 mb-6">Mission</h3>
+                <p class="text-slate-600 leading-relaxed">{{ \App\Models\SiteSetting::get('about_mission', 'Empower communities through education, health, welfare, and environmental programs, creating lasting impact.') }}</p>
+            </div>
         </div>
     </section>
 </div>

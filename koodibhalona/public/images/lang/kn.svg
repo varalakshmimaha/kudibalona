@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Kannada">
+  <defs>
+    <linearGradient id="g-kn" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#b45309" />
+      <stop offset="100%" stop-color="#7c2d12" />
+    </linearGradient>
+  </defs>
+  <circle cx="50" cy="50" r="48" fill="url(#g-kn)" />
+  <circle cx="50" cy="50" r="46" fill="none" stroke="#ffffff" stroke-opacity="0.55" stroke-width="2" />
+  <text x="50" y="58" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="28" font-weight="700">KN</text>
+</svg>

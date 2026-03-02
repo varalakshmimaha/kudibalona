@@ -3,17 +3,23 @@
 @section('title', 'NGO Services')
 
 @section('content')
-<!-- Page Header -->
-<div class="bg-white py-20 text-center">
-    <h1 class="text-4xl md:text-6xl font-bold text-slate-800 mb-6 font-serif">NGO Services</h1>
-    <nav class="flex justify-center items-center gap-2 text-sm font-medium">
-        <a href="{{ route('home') }}" class="text-amber-600 hover:text-amber-700">HOME</a>
-        <span class="text-slate-400">/</span>
-        <span class="text-slate-500 uppercase">NGO Services</span>
-    </nav>
+<!-- Page Header with Background Image -->
+<div class="relative py-24 bg-slate-900 overflow-hidden">
+    <div class="absolute inset-0">
+        <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1740&q=80" alt="NGO Services Banner" class="w-full h-full object-cover opacity-40">
+        <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40"></div>
+    </div>
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-10">
+        <h1 class="text-4xl md:text-6xl font-bold text-white mb-6 font-serif">NGO Services</h1>
+        <nav class="flex justify-center items-center gap-3 text-sm font-bold tracking-widest uppercase text-white/80">
+            <a href="{{ route('home') }}" class="hover:text-amber-400 transition-colors">HOME</a>
+            <span class="text-white/40">/</span>
+            <span class="text-amber-500">NGO SERVICES</span>
+        </nav>
+    </div>
 </div>
 
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
     <div class="space-y-32">
         @foreach($services as $service)
         <div class="flex flex-col md:flex-row gap-12 items-start group">

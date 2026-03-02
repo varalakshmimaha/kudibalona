@@ -7,6 +7,20 @@
 <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
     <form action="{{ route('admin.about.update') }}" method="POST" enctype="multipart/form-data" class="p-8 space-y-8">
         @csrf
+
+        <div class="pb-8 border-b border-gray-100">
+            <h3 class="text-xl font-bold text-gray-800 mb-6">About Page Banner</h3>
+            <div>
+                <label class="block text-sm font-semibold text-gray-700 mb-2">Hero Banner Image</label>
+                @if(!empty($settings['about_banner_image']))
+                <div class="mb-3">
+                    <img src="{{ asset('storage/' . $settings['about_banner_image']) }}" alt="About Banner Preview" class="h-32 rounded-lg border">
+                </div>
+                @endif
+                <input type="file" name="about_banner_image" accept="image/*" class="w-full text-sm text-gray-500 file:mr-4 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-bold file:bg-amber-50 file:text-amber-600 hover:file:bg-amber-100 transition-colors cursor-pointer border border-gray-200 rounded-xl bg-gray-50 h-[46px] flex items-center">
+                <p class="text-xs text-gray-500 mt-2">Used in the top hero section of the About Us page. Recommended wide image (e.g. 1920x700).</p>
+            </div>
+        </div>
         
         <!-- Sanatana Gyana Kirana Section -->
         <div class="pb-8 border-b border-gray-100">

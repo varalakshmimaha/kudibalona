@@ -3,6 +3,24 @@
 @section('title', 'Home')
 
 @section('content')
+@php $homeBanner = \App\Models\SiteSetting::get('home_banner_image'); @endphp
+
+<!-- Page Header with Background Image -->
+<div class="relative py-24 bg-slate-900 overflow-hidden">
+    <div class="absolute inset-0">
+        <img src="{{ $homeBanner ? asset('storage/' . $homeBanner) : 'https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1740&q=80' }}" alt="Home Banner" class="w-full h-full object-cover opacity-40">
+        <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40"></div>
+    </div>
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-10">
+        <h1 class="text-4xl md:text-6xl font-bold text-white mb-6 font-serif">Welcome to {{ \App\Models\SiteSetting::get('site_name', 'Koodibhalona Trust') }}</h1>
+        <nav class="flex justify-center items-center gap-3 text-sm font-bold tracking-widest uppercase text-white/80">
+            <a href="{{ route('home') }}" class="hover:text-amber-400 transition-colors">HOME</a>
+            <span class="text-white/40">/</span>
+            <span class="text-amber-500">WELCOME</span>
+        </nav>
+    </div>
+</div>
+
 <!-- Hero Section -->
 <div class="relative overflow-hidden bg-white border-b border-gray-100">
     <div class="max-w-7xl mx-auto">
