@@ -27,6 +27,9 @@
                 <a href="{{ route('admin.objectives') }}" class="flex items-center p-3 rounded-lg hover:bg-slate-800 transition-colors {{ request()->routeIs('admin.objectives') ? 'bg-amber-500 text-white' : '' }}">
                     <i data-lucide="target" class="w-5 h-5 mr-3"></i> Objectives
                 </a>
+                <a href="{{ route('admin.banners') }}" class="flex items-center p-3 rounded-lg hover:bg-slate-800 transition-colors {{ request()->routeIs('admin.banners') ? 'bg-amber-500 text-white' : '' }}">
+                    <i data-lucide="layout-panel-top" class="w-5 h-5 mr-3"></i> Banners
+                </a>
                 <a href="{{ route('admin.about') }}" class="flex items-center p-3 rounded-lg hover:bg-slate-800 transition-colors {{ request()->routeIs('admin.about') ? 'bg-amber-500 text-white' : '' }}">
                     <i data-lucide="info" class="w-5 h-5 mr-3"></i> About Us
                 </a>

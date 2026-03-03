@@ -38,6 +38,8 @@ Route::prefix('admin')->middleware(AdminAuth::class)->group(function() {
     Route::delete('/translations/{id}', [AdminController::class, 'translationsDestroy'])->name('admin.translations.destroy');
     Route::get('/objectives', [AdminController::class, 'objectives'])->name('admin.objectives');
     Route::post('/objectives', [AdminController::class, 'objectivesUpdate'])->name('admin.objectives.update');
+    Route::get('/banners', [AdminController::class, 'banners'])->name('admin.banners');
+    Route::post('/banners', [AdminController::class, 'bannersUpdate'])->name('admin.banners.update');
 
     // Services Management
     Route::resource('services', \App\Http\Controllers\Admin\ServiceController::class)->names([

@@ -29,13 +29,30 @@ class AdminController extends Controller {
             'footer_about' => SiteSetting::get('footer_about'),
             'site_logo' => SiteSetting::get('site_logo'),
             'home_banner_image' => SiteSetting::get('home_banner_image'),
+            'home_hero_image' => SiteSetting::get('home_hero_image'),
+            'home_hero_label' => SiteSetting::get('home_hero_label'),
+            'home_hero_title' => SiteSetting::get('home_hero_title'),
+            'home_hero_subtitle' => SiteSetting::get('home_hero_subtitle'),
+            'home_hero_button_text' => SiteSetting::get('home_hero_button_text'),
+            'home_hero_button_link' => SiteSetting::get('home_hero_button_link'),
         ];
         return view('admin.settings', compact('settings'));
     }
 
     public function settingsUpdate(Request $request) {
         // ... previous settings logic (I'll keep it)
-        $siteKeys = ['site_name', 'site_tagline', 'footer_text', 'quote_text', 'footer_about'];
+        $siteKeys = [
+            'site_name',
+            'site_tagline',
+            'footer_text',
+            'quote_text',
+            'footer_about',
+            'home_hero_label',
+            'home_hero_title',
+            'home_hero_subtitle',
+            'home_hero_button_text',
+            'home_hero_button_link',
+        ];
         foreach ($siteKeys as $key) {
             if ($request->has($key)) {
                 SiteSetting::set($key, $request->input($key));
@@ -45,10 +62,6 @@ class AdminController extends Controller {
         if ($request->hasFile('site_logo')) {
             $logoPath = $request->file('site_logo')->store('site', 'public');
             SiteSetting::set('site_logo', $logoPath);
-        }
-        if ($request->hasFile('home_banner_image')) {
-            $homeBannerPath = $request->file('home_banner_image')->store('site', 'public');
-            SiteSetting::set('home_banner_image', $homeBannerPath);
         }
 
         $contact = ContactInfo::first();
@@ -163,7 +176,7 @@ class AdminController extends Controller {
     }
 
     public function objectives() {
-        $objective = Objective::first();
+        $objective = Objective::first() ?? new Objective(['list_items' => []]);
         return view('admin.objectives', compact('objective'));
     }
 
@@ -172,10 +185,23 @@ class AdminController extends Controller {
         if (!$objective) $objective = new Objective();
 
         $data = $request->validate([
-            'youtube_url' => 'nullable|string',
-            'list_items' => 'required|array',
+            'youtube_url' => 'nullable|string|max:500',
+            'list_items' => 'nullable|array',
+            'list_items.*' => 'nullable|string|max:500',
             'image' => 'nullable|image|max:2048',
         ]);
+
+        $data['list_items'] = collect($request->input('list_items', []))
+            ->map(fn ($item) => trim((string) $item))
+            ->filter()
+            ->values()
+            ->all();
+
+        if (!isset($data['youtube_url']) || trim((string) $data['youtube_url']) === '') {
+            $data['youtube_url'] = null;
+        } else {
+            $data['youtube_url'] = trim((string) $data['youtube_url']);
+        }
 
         if ($request->hasFile('image')) {
             $data['image'] = $request->file('image')->store('objectives', 'public');
@@ -185,6 +211,32 @@ class AdminController extends Controller {
         $objective->save();
 
         return back()->with('success', 'Objectives updated successfully.');
+    }
+
+    public function banners() {
+        $keys = ['banner_1_image','banner_1_title','banner_1_subtitle','banner_1_btn_text','banner_1_btn_link',
+                 'banner_2_image','banner_2_title','banner_2_subtitle','banner_2_btn_text','banner_2_btn_link'];
+        $banners = [];
+        foreach ($keys as $k) {
+            $banners[$k] = SiteSetting::get($k);
+        }
+        return view('admin.banners', compact('banners'));
+    }
+
+    public function bannersUpdate(Request $request) {
+        $textKeys = ['banner_1_title','banner_1_subtitle','banner_1_btn_text','banner_1_btn_link',
+                     'banner_2_title','banner_2_subtitle','banner_2_btn_text','banner_2_btn_link'];
+        foreach ($textKeys as $key) {
+            SiteSetting::set($key, $request->input($key, ''));
+        }
+        foreach ([1, 2] as $n) {
+            $field = "banner_{$n}_image";
+            if ($request->hasFile($field)) {
+                $path = $request->file($field)->store('banners', 'public');
+                SiteSetting::set($field, $path);
+            }
+        }
+        return back()->with('success', 'Banners saved successfully.');
     }
 }
 

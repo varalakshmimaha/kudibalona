@@ -19,8 +19,8 @@ class CustomTranslationMiddleware
 
         $lang = $_COOKIE['site_lang'] ?? null;
         if (!$lang && isset($_COOKIE['googtrans'])) {
-            $parts = explode('/', trim($_COOKIE['googtrans'], '/'));
-            $lang = $parts[1] ?? 'en';
+            $parts = array_values(array_filter(explode('/', trim($_COOKIE['googtrans'], '/'))));
+            $lang = $parts[count($parts) - 1] ?? 'en';
         }
         $lang = $lang ?: 'en';
 
@@ -51,7 +51,7 @@ class CustomTranslationMiddleware
         // ── Pass 1: Replace text nodes (between tags) ──────────────────────────
         // Skips <script>, <style>, <title> blocks entirely.
         $content = preg_replace_callback(
-            '/(<script\b[^>]*>.*?<\/script>|<style\b[^>]*>.*?<\/style>)|>([^<]+)</is',
+            '/(<script\b[^>]*>.*?<\/script>|<style\b[^>]*>.*?<\/style>|<title\b[^>]*>.*?<\/title>)|>([^<]+)</is',
             function ($matches) use ($translations) {
                 // Return script/style blocks unchanged
                 if (!empty($matches[1])) {

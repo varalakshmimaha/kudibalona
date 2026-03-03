@@ -35,21 +35,14 @@
             </div>
 
             <div class="space-y-4 pb-6 border-b border-gray-100">
-                <label class="block text-sm font-bold text-gray-700">Home Page Banner Image</label>
-                <div class="flex items-center gap-8">
-                    @if(!empty($settings['home_banner_image']))
-                        <div class="w-48 h-24 rounded-xl border border-gray-200 overflow-hidden bg-gray-100 flex items-center justify-center">
-                            <img src="{{ asset('storage/' . $settings['home_banner_image']) }}" alt="Home Banner" class="w-full h-full object-cover">
-                        </div>
-                    @else
-                        <div class="w-48 h-24 rounded-xl border-2 border-dashed border-gray-200 flex items-center justify-center text-gray-300">
-                            <i data-lucide="image" class="w-8 h-8"></i>
-                        </div>
-                    @endif
-                    <div class="flex-grow">
-                        <input type="file" name="home_banner_image" accept="image/*" class="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-amber-50 file:text-amber-700 hover:file:bg-amber-100 transition-all">
-                        <p class="text-[10px] text-gray-400 mt-2">Used for the home page hero banner. Recommended wide image (e.g. 1920x700).</p>
+                <div class="flex items-center justify-between">
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700">Page Banners</label>
+                        <p class="text-xs text-gray-400 mt-1">Home banner, secondary banners and their title/link settings have moved to a dedicated page.</p>
                     </div>
+                    <a href="{{ route('admin.banners') }}" class="inline-flex items-center gap-2 px-5 py-2.5 bg-amber-500 hover:bg-amber-600 text-white text-sm font-bold rounded-xl transition-colors">
+                        <i data-lucide="layout-panel-top" class="w-4 h-4"></i> Manage Banners
+                    </a>
                 </div>
             </div>
 

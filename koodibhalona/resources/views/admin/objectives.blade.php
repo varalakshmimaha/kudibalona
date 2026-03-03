@@ -16,11 +16,11 @@
             
             <!-- YouTube Video -->
             <div class="space-y-4">
-                <label class="block text-sm font-bold text-gray-700">YouTube Embed URL</label>
-                <input type="text" name="youtube_url" value="{{ $objective->youtube_url }}" 
+                <label class="block text-sm font-bold text-gray-700">YouTube URL</label>
+                <input type="text" name="youtube_url" value="{{ old('youtube_url', $objective->youtube_url) }}" 
                     class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all"
-                    placeholder="https://www.youtube.com/embed/...">
-                <p class="text-[10px] text-gray-400">Make sure it's the <b>embed</b> link, e.g., https://www.youtube.com/embed/VIDEO_ID</p>
+                    placeholder="https://www.youtube.com/watch?v=...">
+                <p class="text-[10px] text-gray-400">You can paste any normal YouTube URL (watch, youtu.be, shorts). It will be displayed as a playable video on the homepage.</p>
             </div>
 
             <!-- Image Section -->
@@ -42,12 +42,21 @@
             <div class="space-y-4">
                 <label class="block text-sm font-bold text-gray-700">Trust Objectives (One per line)</label>
                 <div id="items-container" class="space-y-3">
-                    @foreach($objective->list_items as $item)
+                    @php
+                        $existingItems = old('list_items', $objective->list_items ?? []);
+                        $existingItems = is_array($existingItems) ? $existingItems : [];
+                    @endphp
+                    @forelse($existingItems as $item)
                     <div class="flex gap-2">
                         <input type="text" name="list_items[]" value="{{ $item }}" class="flex-grow px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all">
                         <button type="button" onclick="this.parentElement.remove()" class="p-3 text-red-500 hover:bg-red-50 rounded-xl transition-colors"><i data-lucide="trash-2" class="w-5 h-5"></i></button>
                     </div>
-                    @endforeach
+                    @empty
+                    <div class="flex gap-2">
+                        <input type="text" name="list_items[]" class="flex-grow px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all">
+                        <button type="button" onclick="this.parentElement.remove()" class="p-3 text-red-500 hover:bg-red-50 rounded-xl transition-colors"><i data-lucide="trash-2" class="w-5 h-5"></i></button>
+                    </div>
+                    @endforelse
                 </div>
                 <button type="button" onclick="addItem()" class="mt-4 flex items-center text-sm font-bold text-amber-600 hover:text-amber-700">
                     <i data-lucide="plus-circle" class="w-4 h-4 mr-2"></i> Add New Objective

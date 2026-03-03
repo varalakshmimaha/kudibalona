@@ -37,27 +37,41 @@
             <div class="text-slate-600 leading-relaxed space-y-4">
                 <p>Koodibhalona Trust is a public charitable organization based in Bangalore, Karnataka, founded with a vision to serve humanity beyond the boundaries of caste, creed, gender, or religion. Established by Mr. Sai Jay Shankar B.C., the Trust is committed to creating a compassionate and inclusive society through impactful initiatives that touch every aspect of human life.</p>
                 <p>At Koodibhalona Trust, we believe true progress begins when every individual has access to basic needs, equal opportunities, and the freedom to live with dignity. Our programs span across education, healthcare, women and child welfare, senior citizen care, environmental protection, rural development, cultural preservation, and social justice awareness.</p>
-                <p>Guided by the principles of empathy, integrity, and community service, we work closely with local communities, volunteers, and partners to bring sustainable change where it’s needed most. From organizing health camps and educational drives to empowering women and protecting the environment, each initiative is designed to build hope and strengthen society at its roots. Our mission is simple — to empower lives, nurture hope, and build a better tomorrow for generations to come.</p>
+                <p>Guided by the principles of empathy, integrity, and community service, we work closely with local communities, volunteers, and partners to bring sustainable change where it's needed most. From organizing health camps and educational drives to empowering women and protecting the environment, each initiative is designed to build hope and strengthen society at its roots. Our mission is simple — to empower lives, nurture hope, and build a better tomorrow for generations to come.</p>
             </div>
         </div>
     </section>
 
     <!-- Sanatana Gyana Kirana (R) Section -->
-    <section class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-        <div class="space-y-6 lg:order-1">
-            <h2 class="text-3xl md:text-4xl font-bold text-slate-900 flex items-center gap-3">
-                <span class="w-10 h-[2px] bg-amber-500"></span>
-                Sanatana Gyana Kirana (R)
-            </h2>
-            <div class="bg-amber-50/50 p-8 rounded-3xl border border-amber-100 mb-8 whitespace-pre-line text-center italic font-medium text-slate-800 leading-relaxed font-serif">
-                {{ \App\Models\SiteSetting::get('about_santana_kannada', "ಕಳಬೇಡ\nಕೊಲಬೇಡ\nಹುಸಿಯ ನುಡಿಯಲು ಬೇಡ\nಮುನಿಯಬೇಡ\nಅನ್ಯರಿಗೆ ಅಸಹ್ಯಪಡಬೇಡ\nತನ್ನ ಬಣ್ಣಿಸಬೇಡ\nಇದಿರ ಹಳಿಯಲು ಬೇಡ\nಇದೇ ಅಂತರಂಗಶುದ್ಧಿ ಇದೇ ಬಹಿರಂಗಶುದ್ಧಿ\nಇದೇ ನಮ್ಮ ಕೂಡಲಸಂಗಮದೇವರನೊಲಿಸುವ ಪರಿ.") }}
+    <section class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+        <div class="space-y-8 lg:order-1">
+            <div>
+                <span class="text-amber-500 text-2xl">&#10070;</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mt-2 font-serif">Sanatana Gyana Kirana (R)</h2>
             </div>
+
+            {{-- Kannada Verses — displayed line-by-line --}}
+            @php
+                $kannadaText = \App\Models\SiteSetting::get('about_santana_kannada', "ಕಳಬೇಡ\nಕೊಲಬೇಡ\nಹುಸಿಯ ನುಡಿಯಲು ಬೇಡ\nಮುನಿಯಬೇಡ\nಅನ್ಯರಿಗೆ ಅಸಹ್ಯಪಡಬೇಡ\nತನ್ನ ಬಣ್ಣಿಸಬೇಡ\nಇದಿರ ಹಳಿಯಲು ಬೇಡ\nಇದೇ ಅಂತರಂಗಶುದ್ಧಿ ಇದೇ ಬಹಿರಂಗಶುದ್ಧಿ\nಇದೇ ನಮ್ಮ ಕೂಡಲಸಂಗಮದೇವರನೊಲಿಸುವ ಪರಿ.");
+                $kannadaLines = array_filter(array_map('trim', preg_split('/\r?\n/', $kannadaText)));
+            @endphp
+            <div class="space-y-1">
+                @foreach($kannadaLines as $line)
+                    <p class="text-amber-800 font-medium italic text-base leading-relaxed">{{ $line }}</p>
+                @endforeach
+            </div>
+
+            {{-- English Descriptions — full text, no truncation --}}
+            @php
+                $desc1 = \App\Models\SiteSetting::get('about_santana_desc1', "At Sanatana Jnanakendra, we are devoted to preserving and spreading the essence of Sanatana Dharma. We regularly conduct poojas, homams, spiritual discourses, and Veda-Yoga classes to guide individuals toward spiritual growth and inner peace. Our goal is to help every person live a life enriched with devotion, discipline, and dharma.");
+                $desc2 = \App\Models\SiteSetting::get('about_santana_desc2', "As a spiritual and religious trust, our mission is to revive the sacred values and practices that nurture the soul and strengthen the moral fabric of society. We conduct a wide range of activities that inspire faith, devotion, and self-realization.");
+            @endphp
             <div class="text-slate-600 leading-relaxed space-y-4">
-                <p>{{ \App\Models\SiteSetting::get('about_santana_desc1', "At Sanatana Jnanakendra, we are devoted to preserving and spreading the essence of Sanatana Dharma. We regularly conduct poojas, homams, spiritual discourses, and Veda–Yoga classes to guide individuals toward spiritual growth and inner peace. Our goal is to help every person live a life enriched with devotion, discipline, and dharma.") }}</p>
-                <p>{{ \App\Models\SiteSetting::get('about_santana_desc2', "As a spiritual and religious trust, our mission is to revive the sacred values and practices that nurture the soul and strengthen the moral fabric of society. We conduct a wide range of activities that inspire faith, devotion, and self-realization.") }}</p>
+                <div>{!! nl2br(e($desc1)) !!}</div>
+                <div>{!! nl2br(e($desc2)) !!}</div>
             </div>
         </div>
-        <div class="lg:order-2">
+        <div class="lg:order-2 sticky top-28">
             <div class="rounded-3xl overflow-hidden shadow-2xl">
                 @php $santanaImg = \App\Models\SiteSetting::get('about_santana_image'); @endphp
                 <img src="{{ $santanaImg ? asset('storage/' . $santanaImg) : 'https://images.unsplash.com/photo-1548013146-7247d768b061?ixlib=rb-4.0.3&auto=format&fit=crop&w=1740&q=80' }}" alt="Sacred Statue" class="w-full h-auto">
@@ -72,9 +86,9 @@
                 Founder Self Introduction :
                 <span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-16 h-1 bg-amber-500 rounded-full"></span>
             </h2>
-            <p class="text-lg text-slate-700 leading-relaxed">
-                {{ \App\Models\SiteSetting::get('about_founder_intro', 'Founder Self Introduction : Myself introduce 👍🏿 koodibalona trust and sanatana gnana Kirana trust founder president👌🏿 Master Of Art. Karnataka India and practicing , lecturer Advocate and legal consultant social worker and environmentalist👍🏿 and actor director producer. And artist. State level winner 👍🏿clay modelling, mimicry,drawing college art, modelling wedding photographer videographer, research work script writer Sports. Event organiser ,ete. Diploma certificate course of animal husbandry. Photography. Screen printing. Ete.') }}
-            </p>
+            <div class="text-lg text-slate-700 leading-relaxed text-left">
+                {!! nl2br(e(\App\Models\SiteSetting::get('about_founder_intro', 'Myself introduce 👍🏿 koodibalona trust and sanatana gnana Kirana trust founder president👌🏿 Master Of Art. Karnataka India and practicing , lecturer Advocate and legal consultant social worker and environmentalist👍🏿 and actor director producer. And artist. State level winner 👍🏿clay modelling, mimicry,drawing college art, modelling wedding photographer videographer, research work script writer Sports. Event organiser ,ete. Diploma certificate course of animal husbandry. Photography. Screen printing. Ete.'))) !!}
+            </div>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto px-4 mb-20">
             <div class="rounded-2xl overflow-hidden shadow-xl border border-slate-200 aspect-[3/2] bg-slate-100 flex items-center justify-center">
@@ -132,7 +146,7 @@
                     <h3 class="text-xl font-bold text-slate-900 mb-1">{{ $member->name }}</h3>
                     <p class="text-amber-600 font-bold text-sm uppercase tracking-wider mb-4">{{ $member->role }}</p>
                     @if($member->description)
-                        <p class="text-slate-600 text-sm leading-relaxed">{{ Str::limit($member->description, 150) }}</p>
+                        <p class="text-slate-600 text-sm leading-relaxed">{{ $member->description }}</p>
                     @endif
                 </div>
             </div>

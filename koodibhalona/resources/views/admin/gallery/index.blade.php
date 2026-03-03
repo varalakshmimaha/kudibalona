@@ -16,15 +16,21 @@
     <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100 group transition-all hover:shadow-xl">
         <div class="relative aspect-square overflow-hidden bg-gray-100">
             <img src="{{ asset('storage/' . $item->image) }}" alt="{{ $item->caption }}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
-            <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
-                <a href="{{ route('admin.gallery.edit', $item->id) }}" class="w-10 h-10 rounded-full bg-white text-slate-900 flex items-center justify-center hover:bg-amber-500 hover:text-white transition-all shadow-lg">
+            <div class="absolute bottom-3 right-3 z-10 flex items-center gap-2">
+                <a href="{{ route('admin.gallery.edit', $item->id) }}"
+                   class="h-9 px-3 rounded-lg bg-white/95 text-slate-800 border border-gray-200 flex items-center justify-center gap-1.5 hover:bg-amber-500 hover:text-white hover:border-amber-500 transition-all shadow-md"
+                   title="Edit image">
                     <i data-lucide="edit-2" class="w-4 h-4"></i>
+                    <span class="text-xs font-semibold">Edit</span>
                 </a>
                 <form action="{{ route('admin.gallery.destroy', $item->id) }}" method="POST" onsubmit="return confirm('Retire this image from gallery?');">
                     @csrf
                     @method('DELETE')
-                    <button type="submit" class="w-10 h-10 rounded-full bg-white text-red-600 flex items-center justify-center hover:bg-red-600 hover:text-white transition-all shadow-lg">
+                    <button type="submit"
+                            class="h-9 px-3 rounded-lg bg-white/95 text-red-600 border border-red-200 flex items-center justify-center gap-1.5 hover:bg-red-600 hover:text-white hover:border-red-600 transition-all shadow-md"
+                            title="Delete image">
                         <i data-lucide="trash-2" class="w-4 h-4"></i>
+                        <span class="text-xs font-semibold">Delete</span>
                     </button>
                 </form>
             </div>
