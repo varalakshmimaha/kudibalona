@@ -49,10 +49,10 @@
         <h2 class="text-3xl md:text-4xl font-bold text-white mb-8">Want to see more of our work?</h2>
         <p class="text-slate-300 text-xl mb-12">Follow us on social media for daily updates from the field and real-time impact stories.</p>
         <div class="flex flex-wrap justify-center gap-6">
-            <a href="#" class="inline-flex items-center px-8 py-3 bg-white text-slate-900 rounded-full font-bold hover:bg-slate-100 transition-all font-serif">
+            <a href="#" class="notranslate inline-flex items-center px-8 py-3 bg-white text-slate-900 rounded-full font-bold hover:bg-slate-100 transition-all font-serif" translate="no">
                 <i data-lucide="instagram" class="mr-2 w-5 h-5 text-pink-600"></i> Instagram
             </a>
-            <a href="#" class="inline-flex items-center px-8 py-3 bg-white text-slate-900 rounded-full font-bold hover:bg-slate-100 transition-all font-serif">
+            <a href="#" class="notranslate inline-flex items-center px-8 py-3 bg-white text-slate-900 rounded-full font-bold hover:bg-slate-100 transition-all font-serif" translate="no">
                 <i data-lucide="facebook" class="mr-2 w-5 h-5 text-blue-600"></i> Facebook
             </a>
         </div>

@@ -40,20 +40,24 @@
             -webkit-text-fill-color: transparent;
         }
 
-        /* ── Nuke ALL Google Translate visual elements ── */
+        /* ── Hide Google Translate visual chrome ── */
         .goog-te-banner-frame, .goog-te-banner-frame.skiptranslate,
         iframe.goog-te-banner-frame, .goog-te-balloon-frame,
         .goog-te-menu-frame, #goog-gt-tt, .goog-tooltip,
-        .goog-text-highlight, body > .skiptranslate,
+        .goog-text-highlight,
         .goog-te-gadget-icon, .goog-logo-link, .goog-te-gadget-simple,
         .VIpgJd-ZVi9od-l4eHX-hSRGPd, .VIpgJd-yAWNEb-L7lbkb,
         font[color='#f00'], font[color='red'] {
             display: none !important;
             visibility: hidden !important;
+        }
+        /* GT container: keep in DOM (needed for translation) but hide visually */
+        body > .skiptranslate {
+            height: 0 !important;
+            overflow: hidden !important;
             opacity: 0 !important;
             pointer-events: none !important;
-            width: 0 !important;
-            height: 0 !important;
+            position: absolute !important;
         }
         html, body { top: 0 !important; margin-top: 0 !important; }
 
@@ -191,6 +195,23 @@
             gap: 16px;
         }
         #lang-loading-overlay.show { display: flex; }
+        .lang-loader-logo-wrap {
+            width: 92px;
+            height: 92px;
+            border-radius: 18px;
+            background: #ffffff;
+            border: 1px solid #f1f5f9;
+            box-shadow: 0 12px 26px rgba(15, 23, 42, 0.12);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .lang-loader-logo-wrap img {
+            width: 74%;
+            height: 74%;
+            object-fit: contain;
+        }
         .lang-spinner {
             width: 48px;
             height: 48px;
@@ -215,9 +236,17 @@
     @yield('styles')
 </head>
 <body class="antialiased bg-white text-slate-900 transition-colors duration-300">
+    @php
+        $siteLogo = \App\Models\SiteSetting::get('site_logo');
+        $logoUrl = $siteLogo ? asset('storage/' . $siteLogo) : asset('favicon.ico');
+        $logoFallback = asset('favicon.ico');
+    @endphp
 
     <!-- Language Switching Overlay (instant feedback) -->
     <div id="lang-loading-overlay" role="status" aria-live="polite">
+        <div class="lang-loader-logo-wrap">
+            <img src="{{ $logoUrl }}" alt="Loading logo" onerror="this.onerror=null;this.src='{{ $logoFallback }}';">
+        </div>
         <div class="lang-spinner"></div>
         <p id="lang-loading-label" class="lang-loading-label">Switching language…</p>
         <p class="lang-loading-sub">Please wait a moment</p>
@@ -233,9 +262,7 @@
                 <div class="flex justify-between h-20">
                     <div class="flex items-center">
                         <a href="{{ route('home') }}" class="flex items-center gap-3">
-                            @if($logo = \App\Models\SiteSetting::get('site_logo'))
-                                <img src="{{ asset('storage/' . $logo) }}" alt="Logo" class="h-14 w-14 object-contain">
-                            @endif
+                            <img src="{{ $logoUrl }}" alt="Logo" class="h-14 w-14 object-contain" onerror="this.onerror=null;this.src='{{ $logoFallback }}';">
                             <div class="flex flex-col">
                                 <span class="text-xl font-bold tracking-tight text-slate-900 dark:text-white uppercase">
                                     {{ \App\Models\SiteSetting::get('site_name', 'Koodibhalona Trust') }}
@@ -510,14 +537,25 @@
         }
         function setGoogtransCookie(lang) {
             var h = window.location.hostname;
+            // Also set with leading dot for subdomain compatibility
+            var dh = h.indexOf('.') !== -1 ? '.' + h.replace(/^\./, '') : h;
             if (lang === 'en') {
                 document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/';
                 document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=' + h;
+                document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=' + dh;
             } else {
                 var v = '/en/' + lang;
-                document.cookie = 'googtrans=' + v + '; path=/; max-age=31536000';
-                document.cookie = 'googtrans=' + v + '; path=/; max-age=31536000; domain=' + h;
+                document.cookie = 'googtrans=' + v + '; path=/; max-age=31536000; SameSite=Lax';
+                document.cookie = 'googtrans=' + v + '; path=/; max-age=31536000; domain=' + h + '; SameSite=Lax';
+                document.cookie = 'googtrans=' + v + '; path=/; max-age=31536000; domain=' + dh + '; SameSite=Lax';
             }
+        }
+        function setSiteLangCookie(lang) {
+            var h = window.location.hostname;
+            var dh = h.indexOf('.') !== -1 ? '.' + h.replace(/^\./, '') : h;
+            document.cookie = 'site_lang=' + lang + '; path=/; max-age=31536000; SameSite=Lax';
+            document.cookie = 'site_lang=' + lang + '; path=/; max-age=31536000; domain=' + h + '; SameSite=Lax';
+            document.cookie = 'site_lang=' + lang + '; path=/; max-age=31536000; domain=' + dh + '; SameSite=Lax';
         }
         function updateLanguageUI(lang) {
             document.querySelectorAll('.language-option').forEach(function(o) {
@@ -529,9 +567,14 @@
         function hideGTChrome() {
             document.body.style.top = '0';
             document.documentElement.style.top = '0';
+            // Hide banners, tooltips, highlights — but NOT the main .skiptranslate container
             document.querySelectorAll(
-                '.goog-te-banner-frame, iframe.goog-te-banner-frame, .goog-te-balloon-frame, #goog-gt-tt, .goog-tooltip, .goog-text-highlight, body > .skiptranslate'
+                '.goog-te-banner-frame, iframe.goog-te-banner-frame, .goog-te-balloon-frame, #goog-gt-tt, .goog-tooltip, .goog-text-highlight'
             ).forEach(function(n) { n.style.cssText = 'display:none!important;visibility:hidden!important'; });
+            // The skiptranslate container must stay — just hide visually
+            document.querySelectorAll('body > .skiptranslate').forEach(function(n) {
+                n.style.cssText = 'height:0!important;overflow:hidden!important;opacity:0!important;pointer-events:none!important;position:absolute!important';
+            });
         }
         function initLanguageDropdown() {
             var wr = document.getElementById('language-switcher');
@@ -552,7 +595,7 @@
         // Language switch: set cookie + reload
         function setLanguage(lang) {
             localStorage.setItem('site_lang', lang);
-            document.cookie = 'site_lang=' + lang + '; path=/; max-age=31536000';
+            setSiteLangCookie(lang);
             setGoogtransCookie(lang);
             updateLanguageUI(lang);
 
@@ -579,6 +622,7 @@
             var saved = getSavedLanguage();
             updateLanguageUI(saved);
             initLanguageDropdown();
+            setSiteLangCookie(saved);
             setGoogtransCookie(saved);
             hideGTChrome();
 

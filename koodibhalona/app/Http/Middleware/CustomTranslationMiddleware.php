@@ -17,14 +17,28 @@ class CustomTranslationMiddleware
     {
         $response = $next($request);
 
-        $lang = $_COOKIE['site_lang'] ?? null;
+        // ── Detect language ──────────────────────────────────
+        // Priority: site_lang cookie > googtrans cookie > default (en)
+        $lang = null;
+
+        // 1. site_lang cookie (set by our JS)
+        $siteLangCookie = $_COOKIE['site_lang'] ?? null;
+        if ($siteLangCookie && in_array($siteLangCookie, ['en', 'kn', 'te', 'hi', 'ta'])) {
+            $lang = $siteLangCookie;
+        }
+
+        // 2. Fallback: googtrans cookie (set by Google Translate)
         if (!$lang && isset($_COOKIE['googtrans'])) {
             $parts = array_values(array_filter(explode('/', trim($_COOKIE['googtrans'], '/'))));
-            $lang = $parts[count($parts) - 1] ?? 'en';
+            $gtLang = $parts[count($parts) - 1] ?? 'en';
+            if (in_array($gtLang, ['en', 'kn', 'te', 'hi', 'ta'])) {
+                $lang = $gtLang;
+            }
         }
+
         $lang = $lang ?: 'en';
 
-        if ($lang === 'en' || !in_array($lang, ['kn', 'te', 'hi', 'ta'])) {
+        if ($lang === 'en') {
             return $response;
         }
 
