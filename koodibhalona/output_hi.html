@@ -1,0 +1,1218 @@
+﻿<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>होम | कूड़ीभालोना ट्रस्ट (R)</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <script type="module" src="http://[::1]:5176/@vite/client"></script><link rel="stylesheet" href="http://[::1]:5176/resources/css/app.css" /><script type="module" src="http://[::1]:5176/resources/js/app.js"></script>    <script src="https://unpkg.com/@lucide/web" crossorigin="anonymous"></script>
+    
+    <style>
+        body { font-family: 'Outfit', sans-serif; }
+        h1, h2, h3, .font-serif { font-family: 'Playfair Display', serif; }
+        
+        .glass {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .dark .glass {
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .gold-gradient {
+            background: linear-gradient(135deg, #B8860B 0%, #FFD700 50%, #DAA520 100%);
+        }
+
+        .text-gold {
+            background: linear-gradient(135deg, #B8860B 0%, #FFD700 50%, #DAA520 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* ── Hide Google Translate visual chrome ── */
+        .goog-te-banner-frame, .goog-te-banner-frame.skiptranslate,
+        iframe.goog-te-banner-frame, .goog-te-balloon-frame,
+        .goog-te-menu-frame, #goog-gt-tt, .goog-tooltip,
+        .goog-text-highlight,
+        .goog-te-gadget-icon, .goog-logo-link, .goog-te-gadget-simple,
+        .VIpgJd-ZVi9od-l4eHX-hSRGPd, .VIpgJd-yAWNEb-L7lbkb,
+        font[color='#f00'], font[color='red'] {
+            display: none !important;
+            visibility: hidden !important;
+        }
+        /* GT container: keep in DOM (needed for translation) but hide visually */
+        body > .skiptranslate {
+            height: 0 !important;
+            overflow: hidden !important;
+            opacity: 0 !important;
+            pointer-events: none !important;
+            position: absolute !important;
+        }
+        html, body { top: 0 !important; margin-top: 0 !important; }
+
+        /* Keep GT widget mounted but completely invisible & out of layout */
+        #google_translate_element {
+            position: fixed !important;
+            left: -9999px !important;
+            top: -9999px !important;
+            width: 1px !important;
+            height: 1px !important;
+            overflow: hidden !important;
+            opacity: 0 !important;
+            pointer-events: none !important;
+            z-index: -999 !important;
+        }
+        .goog-te-gadget { font-size: 0 !important; line-height: 0 !important; }
+        .goog-te-gadget img { display: none !important; }
+
+        .language-float {
+            position: fixed;
+            right: 14px;
+            bottom: 20px;
+            z-index: 80;
+            min-width: 96px;
+        }
+        .language-float-toggle {
+            width: 100%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            padding: 9px 12px;
+            border-radius: 9999px;
+            border: 1px solid #f59e0b;
+            background: linear-gradient(180deg, #ffffff 0%, #fff7ed 100%);
+            color: #0f172a;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            cursor: pointer;
+            box-shadow: 0 8px 22px rgba(15, 23, 42, 0.16);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+        .language-float-toggle:hover {
+            transform: translateY(-1px);
+            border-color: #d97706;
+            box-shadow: 0 12px 26px rgba(15, 23, 42, 0.18);
+        }
+        .language-float-toggle:focus-visible {
+            outline: 2px solid #f59e0b;
+            outline-offset: 2px;
+        }
+        .language-toggle-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            line-height: 1;
+        }
+        .language-globe {
+            width: 16px;
+            height: 16px;
+            color: #b45309;
+            flex-shrink: 0;
+        }
+        .language-caret {
+            font-size: 10px;
+            transition: transform 0.2s ease;
+            color: #92400e;
+        }
+        .language-float.open .language-caret {
+            transform: rotate(180deg);
+        }
+        .language-dropdown {
+            position: absolute;
+            right: 0;
+            bottom: calc(100% + 10px);
+            width: 210px;
+            padding: 8px;
+            border-radius: 12px;
+            border: 1px solid #fde68a;
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 12px 30px rgba(15, 23, 42, 0.15);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+        .language-option {
+            width: 100%;
+            display: block;
+            text-align: left;
+            border: 0;
+            border-radius: 8px;
+            background: transparent;
+            color: #0f172a;
+            padding: 8px 10px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+        }
+        .language-option:hover {
+            background: #f8fafc;
+        }
+        .language-option.active {
+            background: #fff7ed;
+            color: #b45309;
+            font-weight: 700;
+        }
+        @media (max-width: 640px) {
+            .language-float {
+                right: 10px;
+                bottom: 12px;
+                min-width: 92px;
+            }
+            .language-dropdown {
+                width: 195px;
+            }
+            .language-float-toggle {
+                padding: 8px 11px;
+            }
+        }
+
+        /* ── Language Switch Loading Overlay ── */
+        #lang-loading-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+        }
+        #lang-loading-overlay.show { display: flex; }
+        .lang-loader-logo-wrap {
+            width: 92px;
+            height: 92px;
+            border-radius: 18px;
+            background: #ffffff;
+            border: 1px solid #f1f5f9;
+            box-shadow: 0 12px 26px rgba(15, 23, 42, 0.12);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .lang-loader-logo-wrap img {
+            width: 74%;
+            height: 74%;
+            object-fit: contain;
+        }
+        .lang-spinner {
+            width: 48px;
+            height: 48px;
+            border: 4px solid #fde68a;
+            border-top-color: #f59e0b;
+            border-radius: 50%;
+            animation: lang-spin 0.7s linear infinite;
+        }
+        @keyframes lang-spin { to { transform: rotate(360deg); } }
+        .lang-loading-label {
+            font-family: 'Outfit', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            color: #0f172a;
+        }
+        .lang-loading-sub {
+            font-size: 12px;
+            color: #64748b;
+            margin-top: -8px;
+        }
+    </style>
+    <style>
+/* ── Hero Slider ─────────────────────────────── */
+#hero-slider {
+    position: relative;
+    width: 100%;
+    min-height: calc(100vh - 80px);
+    overflow: hidden;
+    background: #1e0a3c;
+}
+.hero-slides-wrapper {
+    position: relative;
+    width: 100%;
+    min-height: calc(100vh - 80px);
+}
+/* pseudo-element keeps wrapper height even when all children are absolute */
+.hero-slides-wrapper::before {
+    content: '';
+    display: block;
+    min-height: calc(100vh - 80px);
+}
+.hero-slide {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.9s cubic-bezier(.4,0,.2,1);
+    pointer-events: none;
+    z-index: 1;
+}
+.hero-slide.active {
+    opacity: 1;
+    pointer-events: auto;
+    z-index: 2;
+}
+/* Background image */
+.hero-bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transform: scale(1.04);
+    transition: transform 6s ease;
+}
+.hero-slide.active .hero-bg {
+    transform: scale(1);
+}
+/* Purple → orange gradient overlay (matching screenshot) */
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        105deg,
+        rgba(88, 28, 135, 0.82) 0%,
+        rgba(124, 58, 237, 0.70) 35%,
+        rgba(217, 119, 6, 0.55) 65%,
+        rgba(180, 83, 9, 0.75) 100%
+    );
+}
+/* Content */
+.hero-content {
+    position: relative;
+    z-index: 10;
+    max-width: 80rem;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    width: 100%;
+    padding-top: 2rem;
+    padding-bottom: 5rem;
+}
+.hero-label {
+    font-size: 0.875rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(253, 230, 138, 0.95);
+    margin-bottom: 1rem;
+    animation: slideUp 0.7s ease both;
+    animation-delay: 0.1s;
+}
+.hero-title {
+    font-size: clamp(2rem, 5vw, 4rem);
+    font-weight: 800;
+    color: #ffffff;
+    line-height: 1.15;
+    max-width: 55rem;
+    margin-bottom: 2rem;
+    font-family: 'Playfair Display', serif;
+    text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+    animation: slideUp 0.7s ease both;
+    animation-delay: 0.2s;
+}
+.hero-subtitle-inline {
+    display: block;
+    color: #fde68a;
+    font-size: 0.85em;
+    margin-top: 0.3em;
+}
+.hero-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 32px;
+    background: linear-gradient(135deg, #B8860B 0%, #FFD700 50%, #DAA520 100%);
+    color: #1a1a1a;
+    font-weight: 700;
+    font-size: 1rem;
+    border-radius: 9999px;
+    text-decoration: none;
+    box-shadow: 0 8px 30px rgba(218,165,32,0.45);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    animation: slideUp 0.7s ease both;
+    animation-delay: 0.35s;
+}
+.hero-btn:hover {
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 14px 40px rgba(218,165,32,0.55);
+}
+.hero-btn-icon { width: 18px; height: 18px; transition: transform 0.2s; }
+.hero-btn:hover .hero-btn-icon { transform: translateX(4px); }
+
+/* Arrows */
+.hero-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 20;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.18);
+    border: 1.5px solid rgba(255,255,255,0.35);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+    backdrop-filter: blur(8px);
+}
+.hero-arrow svg { width: 22px; height: 22px; }
+.hero-arrow:hover { background: rgba(255,255,255,0.30); transform: translateY(-50%) scale(1.08); }
+.hero-arrow-prev { left: 1.25rem; }
+.hero-arrow-next { right: 1.25rem; }
+
+/* Dots */
+.hero-dots {
+    position: absolute;
+    bottom: 1.75rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 20;
+    display: flex;
+    gap: 10px;
+}
+.hero-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 9999px;
+    background: rgba(255,255,255,0.40);
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s, width 0.3s;
+}
+.hero-dot.active {
+    background: #FFD700;
+    width: 28px;
+}
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(28px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 640px) {
+    .hero-title { font-size: 1.75rem; }
+    .hero-btn   { padding: 12px 24px; font-size: 0.9rem; }
+    .hero-arrow { width: 38px; height: 38px; }
+    .hero-arrow svg { width: 18px; height: 18px; }
+}
+</style>
+</head>
+<body class="antialiased bg-white text-slate-900 transition-colors duration-300">
+    
+    <!-- Language Switching Overlay (instant feedback) -->
+    <div id="lang-loading-overlay" role="status" aria-live="polite">
+        <div class="lang-loader-logo-wrap">
+            <img src="http://localhost/storage/site/IM2mZJOmg01xUkfhcJTuROMheZ5ZzjPpsepmIM10.jpg" alt="Loading logo" onerror="this.onerror=null;this.src='http://localhost/favicon.ico';">
+        </div>
+        <div class="lang-spinner"></div>
+        <p id="lang-loading-label" class="lang-loading-label">Switching language…</p>
+        <p class="lang-loading-sub">Please wait a moment</p>
+    </div>
+
+    <!-- Google Translate widget: isolated from layout, screen-off-left -->
+    <div id="google_translate_element" aria-hidden="true"></div>
+
+    <div class="min-h-screen flex flex-col">
+        <!-- Navigation -->
+        <nav class="fixed w-full z-50 transition-all duration-300 glass border-b border-gray-100" id="navbar">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between h-20">
+                    <div class="flex items-center">
+                        <a href="http://localhost" class="flex items-center gap-3">
+                            <img src="http://localhost/storage/site/IM2mZJOmg01xUkfhcJTuROMheZ5ZzjPpsepmIM10.jpg" alt="Logo" class="h-14 w-14 object-contain" onerror="this.onerror=null;this.src='http://localhost/favicon.ico';">
+                            <div class="flex flex-col">
+                                <span class="text-xl font-bold tracking-tight text-slate-900 dark:text-white uppercase">
+                                    <span class="notranslate">कूड़ीभालोना ट्रस्ट (R)</span>
+                                </span>
+                                <span class="text-[10px] text-slate-500 dark:text-amber-500 font-medium">
+                                    & <span class="notranslate">सनातन ज्ञान किरण (R)</span>
+                                </span>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <div class="flex items-center gap-3">
+                        <div class="hidden md:flex items-center space-x-8">
+                            <a href="http://localhost" class="text-sm font-medium hover:text-amber-600 transition-colors text-amber-600"><span class="notranslate">होम</span></a>
+                            <a href="http://localhost/about" class="text-sm font-medium hover:text-amber-600 transition-colors "><span class="notranslate">हमारे बारे में</span></a>
+                            <a href="http://localhost/services" class="text-sm font-medium hover:text-amber-600 transition-colors "><span class="notranslate">एनजीओ सेवाएं</span></a>
+                            <a href="http://localhost/gallery" class="text-sm font-medium hover:text-amber-600 transition-colors "><span class="notranslate">गैलरी</span></a>
+                            <a href="http://localhost/contact" class="text-sm font-medium hover:text-amber-600 transition-colors "><span class="notranslate">संपर्क करें</span></a>
+                        </div>
+
+                        <!-- Hamburger Button (mobile only) -->
+                        <button id="mobile-menu-btn" class="md:hidden flex flex-col justify-center items-center w-10 h-10 rounded-lg border border-amber-200 bg-white/80 hover:bg-amber-50 hover:border-amber-400 transition-all gap-[5px] ml-1" aria-label="Open Menu" aria-expanded="false">
+                            <span class="hamburger-line block w-6 h-[2px] bg-slate-700 rounded transition-all duration-300"></span>
+                            <span class="hamburger-line block w-6 h-[2px] bg-slate-700 rounded transition-all duration-300"></span>
+                            <span class="hamburger-line block w-6 h-[2px] bg-slate-700 rounded transition-all duration-300"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mobile Dropdown Menu -->
+            <div id="mobile-menu" class="md:hidden hidden border-t border-amber-100 bg-white/98 backdrop-blur-md shadow-lg">
+                <div class="px-4 py-3 flex flex-col gap-1">
+                    <a href="http://localhost" class="flex items-center px-4 py-3 text-sm font-semibold rounded-xl transition-colors bg-amber-500 text-white">
+                        <svg class="w-4 h-4 mr-3 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+                        <span class="notranslate">होम</span>
+                    </a>
+                    <a href="http://localhost/about" class="flex items-center px-4 py-3 text-sm font-semibold rounded-xl transition-colors text-slate-700 hover:bg-amber-50 hover:text-amber-600">
+                        <svg class="w-4 h-4 mr-3 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        <span class="notranslate">हमारे बारे में</span>
+                    </a>
+                    <a href="http://localhost/services" class="flex items-center px-4 py-3 text-sm font-semibold rounded-xl transition-colors text-slate-700 hover:bg-amber-50 hover:text-amber-600">
+                        <svg class="w-4 h-4 mr-3 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-2 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+                        <span class="notranslate">एनजीओ सेवाएं</span>
+                    </a>
+                    <a href="http://localhost/gallery" class="flex items-center px-4 py-3 text-sm font-semibold rounded-xl transition-colors text-slate-700 hover:bg-amber-50 hover:text-amber-600">
+                        <svg class="w-4 h-4 mr-3 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                        <span class="notranslate">गैलरी</span>
+                    </a>
+                    <a href="http://localhost/contact" class="flex items-center px-4 py-3 text-sm font-semibold rounded-xl transition-colors text-slate-700 hover:bg-amber-50 hover:text-amber-600">
+                        <svg class="w-4 h-4 mr-3 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                        <span class="notranslate">संपर्क करें</span>
+                    </a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Page Content -->
+        <main class="flex-grow pt-20">
+            
+
+
+
+<section class="relative overflow-hidden" style="min-height:calc(100vh - 80px);" id="hero-slider">
+
+    
+    <div class="hero-slides-wrapper" id="hero-slides-wrapper">
+            <div class="hero-slide active" data-index="0">
+        
+        <div class="hero-bg" style="background-image:url('https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?ixlib=rb-4.0.3&amp;auto=format&amp;fit=crop&amp;w=1920&amp;q=80');"></div>
+
+        
+        <div class="hero-overlay"></div>
+
+        
+        <div class="hero-content">
+                        <p class="hero-label"><span class="notranslate">कूड़ीभालोना ट्रस्ट (R) और सनातन ज्ञान किरण (R) में आपका स्वागत है</span></p>
+                        <h1 class="hero-title">
+                <span class="notranslate">मानवता की सेवा</span> with Compassion &amp; Purpose
+                            </h1>
+                        <a href="/about" class="hero-btn">
+                <span class="notranslate">हमारे बारे में</span>
+                <svg xmlns="http://www.w3.org/2000/svg" class="hero-btn-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+            </a>
+                    </div>
+    </div>
+            <div class="hero-slide " data-index="1">
+        
+        <div class="hero-bg" style="background-image:url('https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?ixlib=rb-4.0.3&amp;auto=format&amp;fit=crop&amp;w=1920&amp;q=80');"></div>
+
+        
+        <div class="hero-overlay"></div>
+
+        
+        <div class="hero-content">
+                        <p class="hero-label"><span class="notranslate">कूड़ीभालोना ट्रस्ट (R) और सनातन ज्ञान किरण (R) में आपका स्वागत है</span></p>
+                        <h1 class="hero-title">
+                <span class="notranslate">मानवता की सेवा</span> with Compassion &amp; Purpose
+                            </h1>
+                        <a href="/about" class="hero-btn">
+                <span class="notranslate">हमारे बारे में</span>
+                <svg xmlns="http://www.w3.org/2000/svg" class="hero-btn-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+            </a>
+                    </div>
+    </div>
+        </div>
+
+    
+        <button class="hero-arrow hero-arrow-prev" id="hero-prev" aria-label="Previous slide">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>
+    </button>
+    <button class="hero-arrow hero-arrow-next" id="hero-next" aria-label="Next slide">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+    </button>
+
+    
+    <div class="hero-dots" id="hero-dots">
+                <button class="hero-dot active" data-index="0" aria-label="Slide 1"></button>
+                <button class="hero-dot " data-index="1" aria-label="Slide 2"></button>
+            </div>
+    </section>
+
+
+
+
+<section class="py-24 bg-white overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="lg:grid lg:grid-cols-2 lg:gap-16 items-center">
+            <div class="relative">
+                <div class="relative z-10 rounded-2xl overflow-hidden shadow-2xl">
+                    <img src="http://localhost/storage/about/cmSkc5VFqIzLWWhbecurxJNgiPsgZx6dRa8OKbPO.jpg" alt="Our Work" class="w-full h-auto">
+                </div>
+                <div class="absolute -bottom-6 -right-6 w-32 h-32 gold-gradient rounded-full opacity-20 -z-0"></div>
+            </div>
+            <div class="mt-12 lg:mt-0">
+                <h3 class="text-amber-600 font-bold tracking-wider uppercase text-sm mb-3">About <span class="notranslate">कूडीबालोण</span> Trust</h3>
+                <h2 class="text-4xl font-bold text-slate-900 mb-6 leading-tight">Empowering Communities, Changing Lives.</h2>
+                <div class="space-y-6 text-slate-600 text-lg">
+                    <p><span class="notranslate">कूडीबालोण</span> Trust is a public charitable organization based in Bangalore, Karnataka, founded with a vision to serve humanity beyond the boundaries of caste, creed, gender, or religion.</p>
+                    <p>Established by Mr. Sai Jay Shankar B.C., the Trust is committed to creating a compassionate and inclusive society through impactful initiatives that touch every aspect of human life.</p>
+                </div>
+                <div class="mt-10">
+                    <a href="http://localhost/about" class="inline-flex items-center text-amber-600 font-semibold hover:text-amber-700 transition-colors">
+                        Discover more <span class="notranslate">हमारे बारे में</span> <i data-lucide="arrow-right" class="ml-2 w-5 h-5"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+<section class="py-24 bg-[#fbfbfd] overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 lg:px-8">
+        <div class="text-center mb-14">
+            <h3 class="text-amber-600 font-bold tracking-wider uppercase text-sm mb-3">What We Stand For</h3>
+            <h2 class="text-3xl md:text-4xl font-bold text-slate-900 font-serif">Objectives of <span class="notranslate">कूडीबालोण</span> Trust</h2>
+            <p class="text-slate-600 text-lg mt-4 max-w-2xl mx-auto">The Trust is established for public charitable purposes and shall function to serve society without discrimination of caste, creed, gender, or religion.</p>
+        </div>
+        <div class="lg:grid lg:grid-cols-2 lg:gap-16 items-start">
+            <div class="space-y-8">
+                                    <div class="rounded-[20px] overflow-hidden shadow-[0_10px_30px_rgba(15,23,42,0.08)] border border-[#efefef] bg-white">
+                        <img src="http://localhost/storage/objectives/7vIto0ryQeoZu15gfV1hUGEMe71xqqji2aybk8Zc.jpg" alt="Objectives" class="w-full h-auto object-cover">
+                    </div>
+                                                <a href="https://www.youtube.com/watch?v=IrPMIMCaYoY" target="_blank" rel="noopener"
+                   class="group relative block rounded-[20px] overflow-hidden shadow-[0_10px_30px_rgba(15,23,42,0.10)] border border-[#efefef] bg-black">
+                                            <img src="https://img.youtube.com/vi/IrPMIMCaYoY/hqdefault.jpg" alt="Watch on YouTube" class="w-full h-auto object-cover opacity-80 group-hover:opacity-60 transition-opacity duration-300">
+                                        <div class="absolute inset-0 flex items-center justify-center">
+                        <div class="w-16 h-16 rounded-full bg-red-600 flex items-center justify-center shadow-2xl group-hover:scale-110 transition-transform duration-300">
+                            <svg class="w-7 h-7 text-white ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                        </div>
+                    </div>
+                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 p-4">
+                        <p class="text-white text-sm font-semibold flex items-center gap-2">
+                            <svg class="w-5 h-5 text-red-500" fill="currentColor" viewBox="0 0 24 24"><path d="M23.5 6.2a3 3 0 00-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 00.5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 002.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 002.1-2.1c.5-1.9.5-5.8.5-5.8s0-3.9-.5-5.8z"/><polygon fill="white" points="9.6,15.6 15.8,12 9.6,8.4"/></svg>
+                            Watch on YouTube
+                        </p>
+                    </div>
+                </a>
+                            </div>
+            <div class="mt-12 lg:mt-0">
+                <div class="bg-white rounded-[22px] shadow-[0_10px_30px_rgba(15,23,42,0.08)] border border-[#eaeaea] p-6 sm:p-8 lg:p-10">
+                    <h3 class="text-2xl font-bold font-serif text-slate-900 mb-4 border-b border-gray-100 pb-3"><span class="notranslate">हमारे प्रमुख ध्यान क्षेत्र</span></h3>
+                                            <div class="divide-y divide-gray-100">
+                                                        <div class="flex items-start gap-3 py-3 group">
+                                <span class="text-amber-500 font-bold text-lg leading-tight mt-0.5 flex-shrink-0">›</span>
+                                <p class="text-slate-700 font-medium leading-relaxed group-hover:text-slate-900 transition-colors">Relief of the poor, needy, and distressed</p>
+                            </div>
+                                                        <div class="flex items-start gap-3 py-3 group">
+                                <span class="text-amber-500 font-bold text-lg leading-tight mt-0.5 flex-shrink-0">›</span>
+                                <p class="text-slate-700 font-medium leading-relaxed group-hover:text-slate-900 transition-colors">Promotion of education and literacy</p>
+                            </div>
+                                                        <div class="flex items-start gap-3 py-3 group">
+                                <span class="text-amber-500 font-bold text-lg leading-tight mt-0.5 flex-shrink-0">›</span>
+                                <p class="text-slate-700 font-medium leading-relaxed group-hover:text-slate-900 transition-colors">Provision of medical relief and health awareness</p>
+                            </div>
+                                                        <div class="flex items-start gap-3 py-3 group">
+                                <span class="text-amber-500 font-bold text-lg leading-tight mt-0.5 flex-shrink-0">›</span>
+                                <p class="text-slate-700 font-medium leading-relaxed group-hover:text-slate-900 transition-colors">Women welfare and empowerment</p>
+                            </div>
+                                                        <div class="flex items-start gap-3 py-3 group">
+                                <span class="text-amber-500 font-bold text-lg leading-tight mt-0.5 flex-shrink-0">›</span>
+                                <p class="text-slate-700 font-medium leading-relaxed group-hover:text-slate-900 transition-colors">Child welfare and development</p>
+                            </div>
+                                                        <div class="flex items-start gap-3 py-3 group">
+                                <span class="text-amber-500 font-bold text-lg leading-tight mt-0.5 flex-shrink-0">›</span>
+                                <p class="text-slate-700 font-medium leading-relaxed group-hover:text-slate-900 transition-colors">Welfare of senior citizens</p>
+                            </div>
+                                                        <div class="flex items-start gap-3 py-3 group">
+                                <span class="text-amber-500 font-bold text-lg leading-tight mt-0.5 flex-shrink-0">›</span>
+                                <p class="text-slate-700 font-medium leading-relaxed group-hover:text-slate-900 transition-colors">Welfare of differently-abled persons</p>
+                            </div>
+                                                        <div class="flex items-start gap-3 py-3 group">
+                                <span class="text-amber-500 font-bold text-lg leading-tight mt-0.5 flex-shrink-0">›</span>
+                                <p class="text-slate-700 font-medium leading-relaxed group-hover:text-slate-900 transition-colors">Environmental protection, sustainability, and animal welfare</p>
+                            </div>
+                                                        <div class="flex items-start gap-3 py-3 group">
+                                <span class="text-amber-500 font-bold text-lg leading-tight mt-0.5 flex-shrink-0">›</span>
+                                <p class="text-slate-700 font-medium leading-relaxed group-hover:text-slate-900 transition-colors">Promotion of arts, culture, and heritage</p>
+                            </div>
+                                                        <div class="flex items-start gap-3 py-3 group">
+                                <span class="text-amber-500 font-bold text-lg leading-tight mt-0.5 flex-shrink-0">›</span>
+                                <p class="text-slate-700 font-medium leading-relaxed group-hover:text-slate-900 transition-colors">Legal aid, human rights awareness, and constitutional literacy</p>
+                            </div>
+                                                        <div class="flex items-start gap-3 py-3 group">
+                                <span class="text-amber-500 font-bold text-lg leading-tight mt-0.5 flex-shrink-0">›</span>
+                                <p class="text-slate-700 font-medium leading-relaxed group-hover:text-slate-900 transition-colors">Advancement of science, technology, and innovation</p>
+                            </div>
+                                                        <div class="flex items-start gap-3 py-3 group">
+                                <span class="text-amber-500 font-bold text-lg leading-tight mt-0.5 flex-shrink-0">›</span>
+                                <p class="text-slate-700 font-medium leading-relaxed group-hover:text-slate-900 transition-colors">Emergency relief and disaster response</p>
+                            </div>
+                                                        <div class="flex items-start gap-3 py-3 group">
+                                <span class="text-amber-500 font-bold text-lg leading-tight mt-0.5 flex-shrink-0">›</span>
+                                <p class="text-slate-700 font-medium leading-relaxed group-hover:text-slate-900 transition-colors">Promotion of yoga, meditation, and holistic wellness</p>
+                            </div>
+                                                        <div class="flex items-start gap-3 py-3 group">
+                                <span class="text-amber-500 font-bold text-lg leading-tight mt-0.5 flex-shrink-0">›</span>
+                                <p class="text-slate-700 font-medium leading-relaxed group-hover:text-slate-900 transition-colors">Rural development and infrastructure improvement</p>
+                            </div>
+                                                        <div class="flex items-start gap-3 py-3 group">
+                                <span class="text-amber-500 font-bold text-lg leading-tight mt-0.5 flex-shrink-0">›</span>
+                                <p class="text-slate-700 font-medium leading-relaxed group-hover:text-slate-900 transition-colors">Miscellaneous charitable activities contributing to social welfare and nation-building</p>
+                            </div>
+                                                    </div>
+                                    </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+<section class="py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+            <h3 class="text-amber-600 font-bold tracking-wider uppercase text-sm mb-3">What We Do</h3>
+            <h2 class="text-4xl font-bold text-slate-900">Our Core Initiatives</h2>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <div class="bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 flex flex-col items-center group relative overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-b from-transparent to-amber-50/50 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
+                <div class="relative w-16 h-16 rounded-2xl bg-slate-50 border border-slate-100 flex items-center justify-center mb-6 shadow-sm p-1">
+                    <img src="http://localhost/storage/services/VSXZPF8xd7BrPzcKnL2sDh5XZ4sZSYXtXRekDl4M.jpg" class="w-full h-full object-cover rounded-xl" alt="icon">
+                </div>
+                <h4 class="text-xl font-bold text-slate-900 mb-3 text-center font-serif relative z-10">sdfghjk</h4>
+                <p class="text-slate-600 text-sm line-clamp-3 mb-6 text-center leading-relaxed relative z-10">sedrftgyhuojikl;ygihuoijokcfvgbhnjm</p>
+                <div class="mt-auto w-full pt-4 border-t border-slate-100 flex items-center justify-between relative z-10">
+                    <span class="text-xs font-bold text-amber-600 bg-amber-50 px-3 py-1 rounded-full uppercase tracking-wider">sdcfvnm,</span>
+                    <a href="http://localhost/services" class="w-8 h-8 rounded-full bg-amber-50 flex items-center justify-center text-amber-600 hover:bg-amber-500 hover:text-white transition-colors duration-300">
+                        <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+                    </a>
+                </div>
+            </div>
+                        <div class="bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 flex flex-col items-center group relative overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-b from-transparent to-amber-50/50 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
+                <div class="relative w-16 h-16 rounded-2xl bg-slate-50 border border-slate-100 flex items-center justify-center mb-6 shadow-sm p-1">
+                    <img src="http://localhost/storage/services/TAAd0deuSflGLTy4cjgKmPmC5YczcAG8ZKGvRNgH.png" class="w-full h-full object-cover rounded-xl" alt="icon">
+                </div>
+                <h4 class="text-xl font-bold text-slate-900 mb-3 text-center font-serif relative z-10">Relief of the poor, needy, and distressed</h4>
+                <p class="text-slate-600 text-sm line-clamp-3 mb-6 text-center leading-relaxed relative z-10"><span class="notranslate">कूडीबालोण</span> Trust is deeply committed to helping those who are struggling to survive. We believe no individual should face poverty alone. Our relief initiatives <span class="notranslate">पता</span> the most immediate needs — food, clothing, shelter, and emergency financial assistance — with compassion and care.</p>
+                <div class="mt-auto w-full pt-4 border-t border-slate-100 flex items-center justify-between relative z-10">
+                    <span class="text-xs font-bold text-amber-600 bg-amber-50 px-3 py-1 rounded-full uppercase tracking-wider">Social Welfare</span>
+                    <a href="http://localhost/services" class="w-8 h-8 rounded-full bg-amber-50 flex items-center justify-center text-amber-600 hover:bg-amber-500 hover:text-white transition-colors duration-300">
+                        <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+                    </a>
+                </div>
+            </div>
+                        <div class="bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 flex flex-col items-center group relative overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-b from-transparent to-amber-50/50 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
+                <div class="relative w-16 h-16 rounded-2xl bg-slate-50 border border-slate-100 flex items-center justify-center mb-6 shadow-sm p-1">
+                    <img src="http://localhost/favicon.ico" class="w-full h-full object-cover rounded-xl" alt="icon">
+                </div>
+                <h4 class="text-xl font-bold text-slate-900 mb-3 text-center font-serif relative z-10">Relief of the poor, needy, and distressed</h4>
+                <p class="text-slate-600 text-sm line-clamp-3 mb-6 text-center leading-relaxed relative z-10"><span class="notranslate">कूडीबालोण</span> Trust is deeply committed to helping those who are struggling to survive. We believe no individual should face poverty alone. Our relief initiatives <span class="notranslate">पता</span> the most immediate needs — food, clothing, shelter, and emergency financial assistance — with compassion and care.</p>
+                <div class="mt-auto w-full pt-4 border-t border-slate-100 flex items-center justify-between relative z-10">
+                    <span class="text-xs font-bold text-amber-600 bg-amber-50 px-3 py-1 rounded-full uppercase tracking-wider">Social Welfare</span>
+                    <a href="http://localhost/services" class="w-8 h-8 rounded-full bg-amber-50 flex items-center justify-center text-amber-600 hover:bg-amber-500 hover:text-white transition-colors duration-300">
+                        <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+                    </a>
+                </div>
+            </div>
+                        <div class="bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 flex flex-col items-center group relative overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-b from-transparent to-amber-50/50 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
+                <div class="relative w-16 h-16 rounded-2xl bg-slate-50 border border-slate-100 flex items-center justify-center mb-6 shadow-sm p-1">
+                    <img src="http://localhost/favicon.ico" class="w-full h-full object-cover rounded-xl" alt="icon">
+                </div>
+                <h4 class="text-xl font-bold text-slate-900 mb-3 text-center font-serif relative z-10">Promotion of education and literacy</h4>
+                <p class="text-slate-600 text-sm line-clamp-3 mb-6 text-center leading-relaxed relative z-10">We believe a life transformed begins with education. We make quality education accessible through literacy campaigns, adult education initiatives, scholarship drives, and school support programs for those who need it most.</p>
+                <div class="mt-auto w-full pt-4 border-t border-slate-100 flex items-center justify-between relative z-10">
+                    <span class="text-xs font-bold text-amber-600 bg-amber-50 px-3 py-1 rounded-full uppercase tracking-wider">Education</span>
+                    <a href="http://localhost/services" class="w-8 h-8 rounded-full bg-amber-50 flex items-center justify-center text-amber-600 hover:bg-amber-500 hover:text-white transition-colors duration-300">
+                        <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+                    </a>
+                </div>
+            </div>
+                        <div class="bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 flex flex-col items-center group relative overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-b from-transparent to-amber-50/50 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
+                <div class="relative w-16 h-16 rounded-2xl bg-slate-50 border border-slate-100 flex items-center justify-center mb-6 shadow-sm p-1">
+                    <img src="http://localhost/favicon.ico" class="w-full h-full object-cover rounded-xl" alt="icon">
+                </div>
+                <h4 class="text-xl font-bold text-slate-900 mb-3 text-center font-serif relative z-10">Promotion of education and literacy</h4>
+                <p class="text-slate-600 text-sm line-clamp-3 mb-6 text-center leading-relaxed relative z-10">We believe a life transformed begins with education. We make quality education accessible through literacy campaigns, adult education initiatives, scholarship drives, and school support programs for those who need it most.</p>
+                <div class="mt-auto w-full pt-4 border-t border-slate-100 flex items-center justify-between relative z-10">
+                    <span class="text-xs font-bold text-amber-600 bg-amber-50 px-3 py-1 rounded-full uppercase tracking-wider">Education</span>
+                    <a href="http://localhost/services" class="w-8 h-8 rounded-full bg-amber-50 flex items-center justify-center text-amber-600 hover:bg-amber-500 hover:text-white transition-colors duration-300">
+                        <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+                    </a>
+                </div>
+            </div>
+                        <div class="bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 flex flex-col items-center group relative overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-b from-transparent to-amber-50/50 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
+                <div class="relative w-16 h-16 rounded-2xl bg-slate-50 border border-slate-100 flex items-center justify-center mb-6 shadow-sm p-1">
+                    <img src="http://localhost/favicon.ico" class="w-full h-full object-cover rounded-xl" alt="icon">
+                </div>
+                <h4 class="text-xl font-bold text-slate-900 mb-3 text-center font-serif relative z-10">Provision of medical relief and health awareness</h4>
+                <p class="text-slate-600 text-sm line-clamp-3 mb-6 text-center leading-relaxed relative z-10">We bridge the healthcare gap through free medical camps, medicine distribution, and community health awareness sessions on prevention, hygiene, nutrition, and disease management — ensuring no one is left without care.</p>
+                <div class="mt-auto w-full pt-4 border-t border-slate-100 flex items-center justify-between relative z-10">
+                    <span class="text-xs font-bold text-amber-600 bg-amber-50 px-3 py-1 rounded-full uppercase tracking-wider">Healthcare</span>
+                    <a href="http://localhost/services" class="w-8 h-8 rounded-full bg-amber-50 flex items-center justify-center text-amber-600 hover:bg-amber-500 hover:text-white transition-colors duration-300">
+                        <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+                    </a>
+                </div>
+            </div>
+                    </div>
+        <div class="mt-16 text-center">
+            <a href="http://localhost/services" class="inline-flex items-center px-8 py-3 bg-slate-900 text-white rounded-full font-semibold hover:bg-slate-800 transition-all">
+                View All Services
+            </a>
+        </div>
+    </div>
+</section>
+
+
+
+
+<section class="relative py-24 overflow-hidden">
+    <div class="absolute inset-0 bg-slate-950">
+        <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&auto=format&fit=crop&w=1740&q=80" alt="Impact" class="w-full h-full object-cover opacity-20">
+    </div>
+    <div class="relative z-10 max-w-4xl mx-auto px-4 text-center">
+        <h2 class="text-4xl font-bold text-white mb-8">Ready to Make an Impact?</h2>
+        <p class="text-slate-300 text-xl mb-12">Your contribution helps us provide education, healthcare, and essential relief to those in need. Join us in building a better future.</p>
+        <div class="flex flex-col sm:flex-row justify-center gap-6">
+            <a href="http://localhost/contact" class="px-10 py-4 gold-gradient text-white rounded-full font-bold text-lg shadow-xl hover:scale-105 transition-all">Get Involved</a>
+            <a href="http://localhost/contact" class="px-10 py-4 bg-white/10 backdrop-blur-md text-white border border-white/20 rounded-full font-bold text-lg hover:bg-white/20 transition-all">Volunteer With Us</a>
+        </div>
+    </div>
+</section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-[#333333] text-gray-300 pt-20 pb-10">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 pb-16">
+                    <!-- About Us -->
+                    <div class="space-y-6">
+                        <h4 class="text-amber-500 font-bold text-lg"><span class="notranslate">हमारे बारे में</span></h4>
+                        <p class="text-sm leading-relaxed text-gray-400">
+                            <span class="notranslate">कूडीबालोण</span> Trust is a charitable organization in Bangalore dedicated to <span class="notranslate">मानवता की सेवा</span> beyond boundaries, empowering lives, and building a better tomorrow through compasssion and inclusive initiatives.
+                        </p>
+                    </div>
+
+                    <!-- Quick Links -->
+                    <div class="space-y-6">
+                        <h4 class="text-amber-500 font-bold text-lg"><span class="notranslate">त्वरित कड़ियाँ</span></h4>
+                        <ul class="space-y-4 text-sm">
+                            <li><a href="http://localhost" class="hover:text-amber-500 transition-colors"><span class="notranslate">होम</span></a></li>
+                            <li><a href="http://localhost/about" class="hover:text-amber-500 transition-colors"><span class="notranslate">हमारे बारे में</span></a></li>
+                            <li><a href="http://localhost/services" class="hover:text-amber-500 transition-colors"><span class="notranslate">एनजीओ सेवाएं</span></a></li>
+                            <li><a href="http://localhost/gallery" class="hover:text-amber-500 transition-colors"><span class="notranslate">गैलरी</span></a></li>
+                            <li><a href="http://localhost/contact" class="hover:text-amber-500 transition-colors"><span class="notranslate">संपर्क करें</span></a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Contact -->
+                    <div class="space-y-6">
+                        <h4 class="text-amber-500 font-bold text-lg">Contact</h4>
+                                                <ul class="space-y-4 text-sm">
+                            <li class="flex items-start">
+                                <span class="break-all italic"><span class="notranslate">ईमेल</span>: <span class="notranslate">कूडीबालोण</span>@gmail.com</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span><span class="notranslate">फ़ोन</span>: +91 96638 13500</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="leading-relaxed"><span class="notranslate">पता</span>: No. 28, 1st Phase, 1st Cross, Teachers Colony, J.P. Nagar, Bangalore – 560078</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Social Icons -->
+                    <div class="flex items-start gap-4 pt-12 md:pt-0">
+                                                                                            </div>
+                </div>
+
+                <!-- Footer Bottom -->
+                <div class="pt-10 border-t border-gray-700/50 flex flex-col md:flex-row justify-between items-center gap-8">
+                    <p class="text-sm text-gray-500">
+                        © 2025 <span class="notranslate">कूडीबालोण</span> Trust. <span class="notranslate">सभी अधिकार सुरक्षित</span>.
+                    </p>
+                    
+
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Language Switcher -->
+    <div class="language-float notranslate" id="language-switcher" aria-label="Language Switcher" translate="no">
+        <button type="button" class="language-float-toggle" id="language-toggle-btn" aria-haspopup="true" aria-expanded="false" aria-controls="language-dropdown">
+            <span class="language-toggle-label">
+                <svg class="language-globe" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/>
+                    <path d="M3 12H21M12 3C14.6 5.4 14.6 18.6 12 21M12 3C9.4 5.4 9.4 18.6 12 21" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+                </svg>
+                <span id="language-current-code">ENG</span>
+            </span>
+            <span class="language-caret" aria-hidden="true">▼</span>
+        </button>
+        <div class="language-dropdown hidden" id="language-dropdown" role="menu">
+            <button type="button" class="language-option" onclick="setLanguage('en')" data-lang="en" role="menuitem">English</button>
+            <button type="button" class="language-option" onclick="setLanguage('kn')" data-lang="kn" role="menuitem">ಕನ್ನಡ – Kannada</button>
+            <button type="button" class="language-option" onclick="setLanguage('hi')" data-lang="hi" role="menuitem">हिन्दी – Hindi</button>
+            <button type="button" class="language-option" onclick="setLanguage('te')" data-lang="te" role="menuitem">తెలుగు – Telugu</button>
+            <button type="button" class="language-option" onclick="setLanguage('ta')" data-lang="ta" role="menuitem">தமிழ் – Tamil</button>
+        </div>
+    </div>
+
+    <!-- Google Translate Script (Async Loading) -->
+    <script type="text/javascript">
+        let googleTranslateReady = false;
+
+        function googleTranslateElementInit() {
+            if (typeof google === 'undefined' || !google.translate) return;
+            
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                includedLanguages: 'en,kn,hi,te,ta',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+                autoDisplay: false
+            }, 'google_translate_element');
+
+            googleTranslateReady = true;
+        }
+
+        // Load Google Translate asynchronously with deferred loading
+        function loadGoogleTranslate() {
+            if (window.googleTranslateScriptLoaded) return;
+            window.googleTranslateScriptLoaded = true;
+            
+            const script = document.createElement('script');
+            script.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+            script.async = true;
+            script.defer = true;
+            script.onerror = () => console.warn('Google Translate failed to load');
+            document.head.appendChild(script);
+        }
+
+        // Load GT only after page is interactive
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', loadGoogleTranslate);
+        } else {
+            loadGoogleTranslate();
+        }
+    </script>
+
+        
+
+    <script>
+        // Safely check if lucide is loaded before creating icons
+        if (typeof lucide !== 'undefined') {
+            lucide.createIcons();
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const navbar = document.getElementById('navbar');
+            const btt = document.getElementById('back-to-top');
+
+            if (navbar && btt) {
+                window.addEventListener('scroll', function() {
+                    if (window.scrollY > 50) {
+                        navbar.classList.add('shadow-xl', 'bg-white/95');
+                        navbar.classList.remove('bg-white/80');
+                    } else {
+                        navbar.classList.remove('shadow-xl', 'bg-white/95');
+                        navbar.classList.add('bg-white/80');
+                    }
+
+                    if (window.scrollY > 300) {
+                        btt.classList.remove('hidden');
+                        btt.classList.add('flex');
+                    } else {
+                        btt.classList.add('hidden');
+                        btt.classList.remove('flex');
+                    }
+                });
+
+                btt.addEventListener('click', () => {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            }
+
+            // Hamburger menu toggle
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            if (mobileMenuBtn && mobileMenu) {
+                const hamburgerLines = document.querySelectorAll('.hamburger-line');
+                
+                mobileMenuBtn.addEventListener('click', function() {
+                    const isOpen = !mobileMenu.classList.contains('hidden');
+                    if (isOpen) {
+                        mobileMenu.classList.add('hidden');
+                        mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                        if(hamburgerLines.length >= 3) {
+                            hamburgerLines[0].style.transform = '';
+                            hamburgerLines[1].style.opacity = '1';
+                            hamburgerLines[2].style.transform = '';
+                        }
+                    } else {
+                        mobileMenu.classList.remove('hidden');
+                        mobileMenuBtn.setAttribute('aria-expanded', 'true');
+                        if(hamburgerLines.length >= 3) {
+                            hamburgerLines[0].style.transform = 'translateY(7px) rotate(45deg)';
+                            hamburgerLines[1].style.opacity = '0';
+                            hamburgerLines[2].style.transform = 'translateY(-7px) rotate(-45deg)';
+                        }
+                    }
+                });
+
+                // Close mobile menu when a nav link is clicked
+                mobileMenu.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        mobileMenu.classList.add('hidden');
+                        mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                        if(hamburgerLines.length >= 3) {
+                            hamburgerLines[0].style.transform = '';
+                            hamburgerLines[1].style.opacity = '1';
+                            hamburgerLines[2].style.transform = '';
+                        }
+                    });
+                });
+            }
+        });
+
+        // ══════════════════════════════════════════════════════
+        // LANGUAGE SWITCHER — fast, non-blocking
+        // ══════════════════════════════════════════════════════
+        const LANGUAGE_LABELS = { en:'ENG', kn:'KAN', hi:'HIN', te:'TEL', ta:'TAM' };
+
+        function getCookieValue(name) {
+            var m = document.cookie.match(new RegExp('(?:^|; )' + name + '=([^;]*)'));
+            return m ? decodeURIComponent(m[1]) : '';
+        }
+        function getSavedLanguage() {
+            var l = localStorage.getItem('site_lang');
+            if (l && LANGUAGE_LABELS[l]) return l;
+            var s = getCookieValue('site_lang');
+            if (s && LANGUAGE_LABELS[s]) return s;
+            return 'en';
+        }
+        function setGoogtransCookie(lang) {
+            var h = window.location.hostname;
+            // Also set with leading dot for subdomain compatibility
+            var dh = h.indexOf('.') !== -1 ? '.' + h.replace(/^\./, '') : h;
+            if (lang === 'en') {
+                document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/';
+                document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=' + h;
+                document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=' + dh;
+            } else {
+                var v = '/en/' + lang;
+                document.cookie = 'googtrans=' + v + '; path=/; max-age=31536000; SameSite=Lax';
+                document.cookie = 'googtrans=' + v + '; path=/; max-age=31536000; domain=' + h + '; SameSite=Lax';
+                document.cookie = 'googtrans=' + v + '; path=/; max-age=31536000; domain=' + dh + '; SameSite=Lax';
+            }
+        }
+        function setSiteLangCookie(lang) {
+            var h = window.location.hostname;
+            var dh = h.indexOf('.') !== -1 ? '.' + h.replace(/^\./, '') : h;
+            document.cookie = 'site_lang=' + lang + '; path=/; max-age=31536000; SameSite=Lax';
+            document.cookie = 'site_lang=' + lang + '; path=/; max-age=31536000; domain=' + h + '; SameSite=Lax';
+            document.cookie = 'site_lang=' + lang + '; path=/; max-age=31536000; domain=' + dh + '; SameSite=Lax';
+        }
+        function updateLanguageUI(lang) {
+            document.querySelectorAll('.language-option').forEach(function(o) {
+                o.classList.toggle('active', o.dataset.lang === lang);
+            });
+            var el = document.getElementById('language-current-code');
+            if (el) el.textContent = LANGUAGE_LABELS[lang] || 'ENG';
+        }
+        function hideGTChrome() {
+            document.body.style.top = '0';
+            document.documentElement.style.top = '0';
+            // Hide banners, tooltips, highlights — but NOT the main .skiptranslate container
+            document.querySelectorAll(
+                '.goog-te-banner-frame, iframe.goog-te-banner-frame, .goog-te-balloon-frame, #goog-gt-tt, .goog-tooltip, .goog-text-highlight'
+            ).forEach(function(n) { n.style.cssText = 'display:none!important;visibility:hidden!important'; });
+            // The skiptranslate container must stay — just hide visually
+            document.querySelectorAll('body > .skiptranslate').forEach(function(n) {
+                n.style.cssText = 'height:0!important;overflow:hidden!important;opacity:0!important;pointer-events:none!important;position:absolute!important';
+            });
+        }
+        function initLanguageDropdown() {
+            var wr = document.getElementById('language-switcher');
+            var tb = document.getElementById('language-toggle-btn');
+            var dd = document.getElementById('language-dropdown');
+            if (!wr || !tb || !dd || wr.dataset.initialized) return;
+            wr.dataset.initialized = '1';
+            function close() { wr.classList.remove('open'); dd.classList.add('hidden'); tb.setAttribute('aria-expanded','false'); }
+            tb.addEventListener('click', function(e) {
+                e.stopPropagation();
+                if (dd.classList.contains('hidden')) { wr.classList.add('open'); dd.classList.remove('hidden'); tb.setAttribute('aria-expanded','true'); }
+                else { close(); }
+            });
+            document.addEventListener('click', function(e) { if (!wr.contains(e.target)) close(); });
+            document.addEventListener('keydown', function(e) { if (e.key === 'Escape') close(); });
+        }
+
+        // Language switch: set cookie + smart reload (optimized)
+        function setLanguage(lang) {
+            localStorage.setItem('site_lang', lang);
+            setSiteLangCookie(lang);
+            setGoogtransCookie(lang);
+            updateLanguageUI(lang);
+
+            // Close dropdown
+            var wr = document.getElementById('language-switcher');
+            var dd = document.getElementById('language-dropdown');
+            var tb = document.getElementById('language-toggle-btn');
+            if (wr) wr.classList.remove('open');
+            if (dd) dd.classList.add('hidden');
+            if (tb) tb.setAttribute('aria-expanded','false');
+
+            // Show loader instantly
+            showLoader('Switching language…');
+
+            // Smart reload: use bfcache-friendly approach
+            localStorage.setItem('lang_switching', Date.now().toString());
+            
+            // Shorter timeout for translation completion
+            setTimeout(function() {
+                window.location.reload();
+            }, 800);
+        }
+
+        // Init: synchronous, no blocking fetch (optimized)
+        (function init() {
+            var saved = getSavedLanguage();
+            updateLanguageUI(saved);
+            initLanguageDropdown();
+            setSiteLangCookie(saved);
+            setGoogtransCookie(saved);
+            hideGTChrome();
+
+            // If we just switched language, keep loader briefly
+            var switchTs = localStorage.getItem('lang_switching');
+            if (switchTs) {
+                showLoader('Applying language…');
+                localStorage.removeItem('lang_switching');
+                setTimeout(function() { hideGTChrome(); hideLoader(); }, 1500);
+            }
+        })();
+
+        window.addEventListener('load', function() {
+            hideGTChrome();
+            // Only auto-hide if NOT switching language (that has its own timer)
+            if (!localStorage.getItem('lang_switching')) hideLoader();
+        });
+
+        // Optimized observer with longer debounce
+        var gtHideTimer = null;
+        new MutationObserver(function() {
+            if (!gtHideTimer) {
+                gtHideTimer = setTimeout(function() { hideGTChrome(); gtHideTimer = null; }, 800);
+            }
+        }).observe(document.documentElement, { childList:true, subtree:true, attributes:true, attributeFilter:['style','class'] });
+
+        // ── Unified Loading Overlay ─────────────────────────
+        function showLoader(msg) {
+            var ov = document.getElementById('lang-loading-overlay');
+            var lb = document.getElementById('lang-loading-label');
+            if (ov) { if (lb && msg) lb.textContent = msg; ov.classList.add('show'); }
+        }
+        function hideLoader() {
+            var ov = document.getElementById('lang-loading-overlay');
+            if (ov) ov.classList.remove('show');
+        }
+
+        // Show loader on any internal page link click
+        document.addEventListener('click', function(e) {
+            var link = e.target.closest('a[href]');
+            if (!link) return;
+            var href = link.getAttribute('href');
+            // Skip external, hash-only, javascript:, or same-page anchors
+            if (!href || href.charAt(0) === '#' || href.indexOf('javascript:') === 0) return;
+            if (link.target === '_blank') return;
+            if (href.indexOf('http') === 0 && href.indexOf(window.location.origin) !== 0) return;
+            showLoader('Loading…');
+        });
+
+        // Safety: hide loader if back/forward navigated
+        window.addEventListener('pageshow', function(e) {
+            if (e.persisted) hideLoader();
+        });
+    </script>
+
+    
+            <script>
+(function() {
+    var slides     = document.querySelectorAll('.hero-slide');
+    var dots       = document.querySelectorAll('.hero-dot');
+    var prevBtn    = document.getElementById('hero-prev');
+    var nextBtn    = document.getElementById('hero-next');
+    var total      = slides.length;
+    var current    = 0;
+    var timer      = null;
+    var INTERVAL   = 5000;
+
+    if (total <= 1) return;
+
+    function goTo(index) {
+        slides[current].classList.remove('active');
+        dots[current] && dots[current].classList.remove('active');
+        current = (index + total) % total;
+        slides[current].classList.add('active');
+        dots[current] && dots[current].classList.add('active');
+    }
+
+    function startAuto() {
+        clearInterval(timer);
+        timer = setInterval(function() { goTo(current + 1); }, INTERVAL);
+    }
+
+    if (prevBtn) prevBtn.addEventListener('click', function() { goTo(current - 1); startAuto(); });
+    if (nextBtn) nextBtn.addEventListener('click', function() { goTo(current + 1); startAuto(); });
+
+    dots.forEach(function(dot, i) {
+        dot.addEventListener('click', function() { goTo(i); startAuto(); });
+    });
+
+    // Touch / swipe support
+    var touchStartX = 0;
+    var sliderEl = document.getElementById('hero-slider');
+    sliderEl.addEventListener('touchstart', function(e) { touchStartX = e.changedTouches[0].screenX; }, { passive: true });
+    sliderEl.addEventListener('touchend', function(e) {
+        var diff = touchStartX - e.changedTouches[0].screenX;
+        if (Math.abs(diff) > 50) { goTo(diff > 0 ? current + 1 : current - 1); startAuto(); }
+    }, { passive: true });
+
+    startAuto();
+})();
+</script>
+</body>
+</html>
