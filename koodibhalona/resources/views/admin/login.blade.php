@@ -13,7 +13,7 @@
         .gold-gradient { background: linear-gradient(135deg, #B8860B 0%, #FFD700 50%, #DAA520 100%); }
     </style>
 </head>
-<body class="min-h-screen bg-slate-950 flex items-center justify-center relative overflow-hidden">
+<body class="min-h-screen bg-slate-950 flex items-center justify-center relative overflow-hidden notranslate">
     <!-- Grid Overlay -->
     <div class="absolute inset-0 opacity-[0.04]" style="background-image: radial-gradient(#DAA520 1px, transparent 1px); background-size: 40px 40px;"></div>
     <!-- Glows -->

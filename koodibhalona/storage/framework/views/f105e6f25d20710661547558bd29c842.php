@@ -1,9 +1,9 @@
 ﻿<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="scroll-smooth">
+<html lang="<?php echo e(str_replace('_', '-', app()->getLocale())); ?>" class="scroll-smooth">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>@yield('title', 'Welcome') | {{ \App\Models\SiteSetting::get('site_name', 'Koodibhalona Trust') }}</title>
+    <title><?php echo $__env->yieldContent('title', 'Welcome'); ?> | <?php echo e(\App\Models\SiteSetting::get('site_name', 'Koodibhalona Trust')); ?></title>
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 
     <!-- Styles -->
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <?php echo app('Illuminate\Foundation\Vite')(['resources/css/app.css', 'resources/js/app.js']); ?>
     <script src="https://unpkg.com/@lucide/web" crossorigin="anonymous"></script>
     
     <style>
@@ -233,19 +233,19 @@
             margin-top: -8px;
         }
     </style>
-    @yield('styles')
+    <?php echo $__env->yieldContent('styles'); ?>
 </head>
 <body class="antialiased bg-white text-slate-900 transition-colors duration-300">
-    @php
+    <?php
         $siteLogo = \App\Models\SiteSetting::get('site_logo');
         $logoUrl = !empty(trim((string)$siteLogo)) ? asset('storage/' . $siteLogo) : asset('favicon.ico');
         $logoFallback = asset('favicon.ico');
-    @endphp
+    ?>
 
     <!-- Language Switching Overlay (instant feedback) -->
     <div id="lang-loading-overlay" role="status" aria-live="polite">
         <div class="lang-loader-logo-wrap">
-            <img src="{{ $logoUrl }}" alt="Loading logo" onerror="this.onerror=null;this.src='{{ $logoFallback }}';">
+            <img src="<?php echo e($logoUrl); ?>" alt="Loading logo" onerror="this.onerror=null;this.src='<?php echo e($logoFallback); ?>';">
         </div>
         <div class="lang-spinner"></div>
         <p id="lang-loading-label" class="lang-loading-label">Switching language…</p>
@@ -261,14 +261,16 @@
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex justify-between h-20">
                     <div class="flex items-center">
-                        <a href="{{ route('home') }}" class="flex items-center gap-3">
-                            <img src="{{ $logoUrl }}" alt="Logo" class="h-14 w-14 object-contain" onerror="this.onerror=null;this.src='{{ $logoFallback }}';">
+                        <a href="<?php echo e(route('home')); ?>" class="flex items-center gap-3">
+                            <img src="<?php echo e($logoUrl); ?>" alt="Logo" class="h-14 w-14 object-contain" onerror="this.onerror=null;this.src='<?php echo e($logoFallback); ?>';">
                             <div class="flex flex-col">
                                 <span class="text-xl font-bold tracking-tight text-slate-900 dark:text-white uppercase">
-                                    {{ \App\Models\SiteSetting::get('site_name', 'Koodibhalona Trust') }}
+                                    <?php echo e(\App\Models\SiteSetting::get('site_name', 'Koodibhalona Trust')); ?>
+
                                 </span>
                                 <span class="text-[10px] text-slate-500 dark:text-amber-500 font-medium">
-                                    {!! \App\Models\SiteSetting::get('site_tagline', '') !!}
+                                    <?php echo \App\Models\SiteSetting::get('site_tagline', ''); ?>
+
                                 </span>
                             </div>
                         </a>
@@ -276,11 +278,11 @@
                     
                     <div class="flex items-center gap-3">
                         <div class="hidden md:flex items-center space-x-8">
-                            <a href="{{ route('home') }}" class="text-sm font-medium hover:text-amber-600 transition-colors {{ request()->routeIs('home') ? 'text-amber-600' : '' }}">Home</a>
-                            <a href="{{ route('about') }}" class="text-sm font-medium hover:text-amber-600 transition-colors {{ request()->routeIs('about') ? 'text-amber-600' : '' }}">About Us</a>
-                            <a href="{{ route('services') }}" class="text-sm font-medium hover:text-amber-600 transition-colors {{ request()->routeIs('services') ? 'text-amber-600' : '' }}">NGO Services</a>
-                            <a href="{{ route('gallery') }}" class="text-sm font-medium hover:text-amber-600 transition-colors {{ request()->routeIs('gallery') ? 'text-amber-600' : '' }}">Gallery</a>
-                            <a href="{{ route('contact') }}" class="text-sm font-medium hover:text-amber-600 transition-colors {{ request()->routeIs('contact') ? 'text-amber-600' : '' }}">Contact Us</a>
+                            <a href="<?php echo e(route('home')); ?>" class="text-sm font-medium hover:text-amber-600 transition-colors <?php echo e(request()->routeIs('home') ? 'text-amber-600' : ''); ?>">Home</a>
+                            <a href="<?php echo e(route('about')); ?>" class="text-sm font-medium hover:text-amber-600 transition-colors <?php echo e(request()->routeIs('about') ? 'text-amber-600' : ''); ?>">About Us</a>
+                            <a href="<?php echo e(route('services')); ?>" class="text-sm font-medium hover:text-amber-600 transition-colors <?php echo e(request()->routeIs('services') ? 'text-amber-600' : ''); ?>">NGO Services</a>
+                            <a href="<?php echo e(route('gallery')); ?>" class="text-sm font-medium hover:text-amber-600 transition-colors <?php echo e(request()->routeIs('gallery') ? 'text-amber-600' : ''); ?>">Gallery</a>
+                            <a href="<?php echo e(route('contact')); ?>" class="text-sm font-medium hover:text-amber-600 transition-colors <?php echo e(request()->routeIs('contact') ? 'text-amber-600' : ''); ?>">Contact Us</a>
                         </div>
 
                         <!-- Hamburger Button (mobile only) -->
@@ -296,23 +298,23 @@
             <!-- Mobile Dropdown Menu -->
             <div id="mobile-menu" class="md:hidden hidden border-t border-amber-100 bg-white/98 backdrop-blur-md shadow-lg">
                 <div class="px-4 py-3 flex flex-col gap-1">
-                    <a href="{{ route('home') }}" class="flex items-center px-4 py-3 text-sm font-semibold rounded-xl transition-colors {{ request()->routeIs('home') ? 'bg-amber-500 text-white' : 'text-slate-700 hover:bg-amber-50 hover:text-amber-600' }}">
+                    <a href="<?php echo e(route('home')); ?>" class="flex items-center px-4 py-3 text-sm font-semibold rounded-xl transition-colors <?php echo e(request()->routeIs('home') ? 'bg-amber-500 text-white' : 'text-slate-700 hover:bg-amber-50 hover:text-amber-600'); ?>">
                         <svg class="w-4 h-4 mr-3 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
                         Home
                     </a>
-                    <a href="{{ route('about') }}" class="flex items-center px-4 py-3 text-sm font-semibold rounded-xl transition-colors {{ request()->routeIs('about') ? 'bg-amber-500 text-white' : 'text-slate-700 hover:bg-amber-50 hover:text-amber-600' }}">
+                    <a href="<?php echo e(route('about')); ?>" class="flex items-center px-4 py-3 text-sm font-semibold rounded-xl transition-colors <?php echo e(request()->routeIs('about') ? 'bg-amber-500 text-white' : 'text-slate-700 hover:bg-amber-50 hover:text-amber-600'); ?>">
                         <svg class="w-4 h-4 mr-3 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                         About Us
                     </a>
-                    <a href="{{ route('services') }}" class="flex items-center px-4 py-3 text-sm font-semibold rounded-xl transition-colors {{ request()->routeIs('services') ? 'bg-amber-500 text-white' : 'text-slate-700 hover:bg-amber-50 hover:text-amber-600' }}">
+                    <a href="<?php echo e(route('services')); ?>" class="flex items-center px-4 py-3 text-sm font-semibold rounded-xl transition-colors <?php echo e(request()->routeIs('services') ? 'bg-amber-500 text-white' : 'text-slate-700 hover:bg-amber-50 hover:text-amber-600'); ?>">
                         <svg class="w-4 h-4 mr-3 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-2 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
                         NGO Services
                     </a>
-                    <a href="{{ route('gallery') }}" class="flex items-center px-4 py-3 text-sm font-semibold rounded-xl transition-colors {{ request()->routeIs('gallery') ? 'bg-amber-500 text-white' : 'text-slate-700 hover:bg-amber-50 hover:text-amber-600' }}">
+                    <a href="<?php echo e(route('gallery')); ?>" class="flex items-center px-4 py-3 text-sm font-semibold rounded-xl transition-colors <?php echo e(request()->routeIs('gallery') ? 'bg-amber-500 text-white' : 'text-slate-700 hover:bg-amber-50 hover:text-amber-600'); ?>">
                         <svg class="w-4 h-4 mr-3 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
                         Gallery
                     </a>
-                    <a href="{{ route('contact') }}" class="flex items-center px-4 py-3 text-sm font-semibold rounded-xl transition-colors {{ request()->routeIs('contact') ? 'bg-amber-500 text-white' : 'text-slate-700 hover:bg-amber-50 hover:text-amber-600' }}">
+                    <a href="<?php echo e(route('contact')); ?>" class="flex items-center px-4 py-3 text-sm font-semibold rounded-xl transition-colors <?php echo e(request()->routeIs('contact') ? 'bg-amber-500 text-white' : 'text-slate-700 hover:bg-amber-50 hover:text-amber-600'); ?>">
                         <svg class="w-4 h-4 mr-3 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
                         Contact Us
                     </a>
@@ -322,7 +324,7 @@
 
         <!-- Page Content -->
         <main class="flex-grow pt-20">
-            @yield('content')
+            <?php echo $__env->yieldContent('content'); ?>
         </main>
 
         <!-- Footer -->
@@ -333,7 +335,8 @@
                     <div class="space-y-6">
                         <h4 class="text-amber-500 font-bold text-lg">About Us</h4>
                         <p class="text-sm leading-relaxed text-gray-400">
-                            {{ \App\Models\SiteSetting::get('footer_about', 'We are dedicated to uplifting underserved communities through education, healthcare, and support programs that inspire hope and lasting change.') }}
+                            <?php echo e(\App\Models\SiteSetting::get('footer_about', 'We are dedicated to uplifting underserved communities through education, healthcare, and support programs that inspire hope and lasting change.')); ?>
+
                         </p>
                     </div>
 
@@ -341,55 +344,56 @@
                     <div class="space-y-6">
                         <h4 class="text-amber-500 font-bold text-lg">Quick Links</h4>
                         <ul class="space-y-4 text-sm">
-                            <li><a href="{{ route('home') }}" class="hover:text-amber-500 transition-colors">Home</a></li>
-                            <li><a href="{{ route('about') }}" class="hover:text-amber-500 transition-colors">About Us</a></li>
-                            <li><a href="{{ route('services') }}" class="hover:text-amber-500 transition-colors">NGO Services</a></li>
-                            <li><a href="{{ route('gallery') }}" class="hover:text-amber-500 transition-colors">Gallery</a></li>
-                            <li><a href="{{ route('contact') }}" class="hover:text-amber-500 transition-colors">Contact Us</a></li>
+                            <li><a href="<?php echo e(route('home')); ?>" class="hover:text-amber-500 transition-colors">Home</a></li>
+                            <li><a href="<?php echo e(route('about')); ?>" class="hover:text-amber-500 transition-colors">About Us</a></li>
+                            <li><a href="<?php echo e(route('services')); ?>" class="hover:text-amber-500 transition-colors">NGO Services</a></li>
+                            <li><a href="<?php echo e(route('gallery')); ?>" class="hover:text-amber-500 transition-colors">Gallery</a></li>
+                            <li><a href="<?php echo e(route('contact')); ?>" class="hover:text-amber-500 transition-colors">Contact Us</a></li>
                         </ul>
                     </div>
 
                     <!-- Contact -->
                     <div class="space-y-6">
                         <h4 class="text-amber-500 font-bold text-lg">Contact</h4>
-                        @php $cinfo = \App\Models\ContactInfo::first(); @endphp
+                        <?php $cinfo = \App\Models\ContactInfo::first(); ?>
                         <ul class="space-y-4 text-sm">
                             <li class="flex items-start">
-                                <span class="break-all italic">Email: {{ $cinfo?->email }}</span>
+                                <span class="break-all italic">Email: <?php echo e($cinfo?->email); ?></span>
                             </li>
                             <li class="flex items-start">
-                                <span>Phone: +91 {{ $cinfo?->phone }}</span>
+                                <span>Phone: +91 <?php echo e($cinfo?->phone); ?></span>
                             </li>
                             <li class="flex items-start">
-                                <span class="leading-relaxed">Address: {{ $cinfo?->address }}</span>
+                                <span class="leading-relaxed">Address: <?php echo e($cinfo?->address); ?></span>
                             </li>
                         </ul>
                     </div>
 
                     <!-- Social Icons -->
                     <div class="flex items-start gap-4 pt-12 md:pt-0">
-                        @if($cinfo?->facebook)
-                            <a href="{{ $cinfo->facebook }}" target="_blank" class="w-10 h-10 rounded-full bg-[#4267B2] text-white flex items-center justify-center hover:scale-110 transition-transform">
+                        <?php if($cinfo?->facebook): ?>
+                            <a href="<?php echo e($cinfo->facebook); ?>" target="_blank" class="w-10 h-10 rounded-full bg-[#4267B2] text-white flex items-center justify-center hover:scale-110 transition-transform">
                                 <i data-lucide="facebook" class="w-5 h-5"></i>
                             </a>
-                        @endif
-                        @if($cinfo?->instagram)
-                            <a href="{{ $cinfo->instagram }}" target="_blank" class="w-10 h-10 rounded-full bg-[#E1306C] text-white flex items-center justify-center hover:scale-110 transition-transform">
+                        <?php endif; ?>
+                        <?php if($cinfo?->instagram): ?>
+                            <a href="<?php echo e($cinfo->instagram); ?>" target="_blank" class="w-10 h-10 rounded-full bg-[#E1306C] text-white flex items-center justify-center hover:scale-110 transition-transform">
                                 <i data-lucide="instagram" class="w-5 h-5"></i>
                             </a>
-                        @endif
-                        @if($cinfo?->youtube)
-                            <a href="{{ $cinfo->youtube }}" target="_blank" class="w-10 h-10 rounded-full bg-[#FF0000] text-white flex items-center justify-center hover:scale-110 transition-transform">
+                        <?php endif; ?>
+                        <?php if($cinfo?->youtube): ?>
+                            <a href="<?php echo e($cinfo->youtube); ?>" target="_blank" class="w-10 h-10 rounded-full bg-[#FF0000] text-white flex items-center justify-center hover:scale-110 transition-transform">
                                 <i data-lucide="youtube" class="w-5 h-5"></i>
                             </a>
-                        @endif
+                        <?php endif; ?>
                     </div>
                 </div>
 
                 <!-- Footer Bottom -->
                 <div class="pt-10 border-t border-gray-700/50 flex flex-col md:flex-row justify-between items-center gap-8">
                     <p class="text-sm text-gray-500">
-                        {{ \App\Models\SiteSetting::get('footer_text', '© 2025 Koodibhalona Trust. All Rights Reserved.') }}
+                        <?php echo e(\App\Models\SiteSetting::get('footer_text', '© 2025 Koodibhalona Trust. All Rights Reserved.')); ?>
+
                     </p>
                     
 
@@ -697,16 +701,16 @@
         });
     </script>
 
-    {{-- Kannada brand-name correction --}}
-    @php
+    
+    <?php
         $siteLang = $_COOKIE['site_lang'] ?? null;
         if (!$siteLang && isset($_COOKIE['googtrans'])) {
             $parts = array_values(array_filter(explode('/', trim($_COOKIE['googtrans'], '/'))));
             $siteLang = $parts[count($parts) - 1] ?? 'en';
         }
         $siteLang = $siteLang ?: 'en';
-    @endphp
-    @if($siteLang === 'kn')
+    ?>
+    <?php if($siteLang === 'kn'): ?>
     <script>
         (function() {
             var CORRECT = '\u0c95\u0cc2\u0ca1\u0cbf\u0cac\u0cbe\u0cb3\u0ccb\u0ca3';
@@ -740,7 +744,8 @@
             setTimeout(fixAll, 4000);
         })();
     </script>
-    @endif
-    @yield('scripts')
+    <?php endif; ?>
+    <?php echo $__env->yieldContent('scripts'); ?>
 </body>
 </html>
+<?php /**PATH C:\Users\varalakshmi\Desktop\charity\koodibhalona\resources\views/layouts/app.blade.php ENDPATH**/ ?>

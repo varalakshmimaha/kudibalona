@@ -17,6 +17,10 @@ class CustomTranslationMiddleware
     {
         $response = $next($request);
 
+        if ($request->is('admin') || $request->is('admin/*')) {
+            return $response;
+        }
+
         // ── Detect language ──────────────────────────────────
         // Priority: site_lang cookie > googtrans cookie > default (en)
         $lang = null;
@@ -154,3 +158,5 @@ class CustomTranslationMiddleware
         return $response;
     }
 }
+
+

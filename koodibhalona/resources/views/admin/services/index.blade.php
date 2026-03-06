@@ -26,7 +26,7 @@
             @foreach($services as $service)
             <tr>
                 <td class="px-6 py-4">
-                    <img src="{{ Str::startsWith($service->image, 'http') ? $service->image : asset('storage/' . $service->image) }}" class="w-16 h-12 object-cover rounded-lg border border-gray-100" alt="">
+                    <img src="{{ !empty(trim((string)$service->image)) ? (Str::startsWith($service->image, 'http') ? $service->image : asset('storage/' . $service->image)) : asset('favicon.ico') }}" class="w-16 h-12 object-cover rounded-lg border border-gray-100" alt="">
                 </td>
                 <td class="px-6 py-4">
                     <div class="font-bold text-gray-900">{{ $service->title }}</div>

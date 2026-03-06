@@ -3,10 +3,14 @@
 @section('title', 'NGO Services')
 
 @section('content')
+@php
+    $servicesBanner = \App\Models\SiteSetting::get('services_page_banner')
+        ?: \App\Models\SiteSetting::get('banner_2_image');
+@endphp
 <!-- Page Header with Background Image -->
 <div class="relative py-24 bg-slate-900 overflow-hidden">
     <div class="absolute inset-0">
-        <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1740&q=80" alt="NGO Services Banner" class="w-full h-full object-cover opacity-40">
+        <img src="{{ $servicesBanner ? asset('storage/' . $servicesBanner) : 'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1740&q=80' }}" alt="NGO Services Banner" class="w-full h-full object-cover opacity-40">
         <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40"></div>
     </div>
     <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-10">
@@ -26,7 +30,7 @@
             <!-- Left Side: Image -->
             <div class="w-full md:w-[400px] shrink-0">
                 <div class="rounded-2xl overflow-hidden shadow-xl border border-slate-100 aspect-[4/3]">
-                    <img src="{{ Str::startsWith($service->image, 'http') ? $service->image : asset('storage/' . $service->image) }}" 
+                    <img src="{{ !empty(trim((string)$service->image)) ? (Str::startsWith($service->image, 'http') ? $service->image : asset('storage/' . $service->image)) : asset('favicon.ico') }}" 
                         alt="{{ $service->title }}" 
                         class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
                 </div>

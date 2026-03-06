@@ -11,7 +11,7 @@ class PageController extends Controller {
         // If no slides configured, build one from banner_1 settings
         if ($slides->isEmpty()) {
             $slides = collect([(object)[
-                'image'       => SiteSetting::get('banner_1_image'),
+                'image'       => SiteSetting::get('home_page_banner') ?: SiteSetting::get('banner_1_image'),
                 'label'       => SiteSetting::get('banner_1_title', 'Welcome to Koodibhalona Trust (R)'),
                 'title'       => SiteSetting::get('banner_1_subtitle', 'Serving Humanity with Compassion & Purpose'),
                 'subtitle'    => null,

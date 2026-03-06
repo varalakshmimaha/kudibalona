@@ -3,10 +3,14 @@
 @section('title', 'Gallery')
 
 @section('content')
+@php
+    $galleryBanner = \App\Models\SiteSetting::get('gallery_page_banner')
+        ?: \App\Models\SiteSetting::get('banner_2_image');
+@endphp
 <!-- Header -->
 <div class="relative py-24 bg-slate-900 overflow-hidden">
     <div class="absolute inset-0">
-        <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&auto=format&fit=crop&w=1740&q=80" alt="Gallery" class="w-full h-full object-cover opacity-30">
+        <img src="{{ $galleryBanner ? asset('storage/' . $galleryBanner) : 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&auto=format&fit=crop&w=1740&q=80' }}" alt="Gallery" class="w-full h-full object-cover opacity-30">
         <div class="absolute inset-0 bg-gradient-to-t from-slate-900"></div>
     </div>
     <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-10">

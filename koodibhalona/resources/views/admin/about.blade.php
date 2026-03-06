@@ -9,16 +9,11 @@
         @csrf
 
         <div class="pb-8 border-b border-gray-100">
-            <h3 class="text-xl font-bold text-gray-800 mb-6">About Page Banner</h3>
-            <div>
-                <label class="block text-sm font-semibold text-gray-700 mb-2">Hero Banner Image</label>
-                @if(!empty($settings['about_banner_image']))
-                <div class="mb-3">
-                    <img src="{{ asset('storage/' . $settings['about_banner_image']) }}" alt="About Banner Preview" class="h-32 rounded-lg border">
-                </div>
-                @endif
-                <input type="file" name="about_banner_image" accept="image/*" class="w-full text-sm text-gray-500 file:mr-4 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-bold file:bg-amber-50 file:text-amber-600 hover:file:bg-amber-100 transition-colors cursor-pointer border border-gray-200 rounded-xl bg-gray-50 h-[46px] flex items-center">
-                <p class="text-xs text-gray-500 mt-2">Used in the top hero section of the About Us page. Recommended wide image (e.g. 1920x700).</p>
+            <h3 class="text-xl font-bold text-gray-800 mb-4">Page Images Moved</h3>
+            <div class="rounded-xl border border-blue-200 bg-blue-50 text-blue-800 p-4 text-sm">
+                Home/About/Gallery/Contact/Services banner images are now managed from
+                <a href="{{ route('admin.banners') }}" class="font-semibold underline">Banners</a>
+                using the page dropdown.
             </div>
         </div>
         

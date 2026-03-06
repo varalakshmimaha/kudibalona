@@ -143,6 +143,7 @@ class AdminController extends Controller {
 
         if (empty($data['category'])) $data['category'] = 'general';
         CustomTranslation::create($data);
+        TranslationOptimizationController::clearTranslationCache();
         return back()->with('success', 'Translation keyword added successfully.');
     }
 
@@ -159,6 +160,7 @@ class AdminController extends Controller {
 
         if (empty($data['category'])) $data['category'] = 'general';
         CustomTranslation::findOrFail($id)->update($data);
+        TranslationOptimizationController::clearTranslationCache();
         return back()->with('success', 'Translation keyword updated successfully.');
     }
 
@@ -166,12 +168,14 @@ class AdminController extends Controller {
         $translation = CustomTranslation::findOrFail($id);
         $translation->is_hidden = !$translation->is_hidden;
         $translation->save();
+        TranslationOptimizationController::clearTranslationCache();
         $msg = $translation->is_hidden ? 'Keyword hidden.' : 'Keyword activated.';
         return back()->with('success', $msg);
     }
 
     public function translationsDestroy($id) {
         CustomTranslation::findOrFail($id)->delete();
+        TranslationOptimizationController::clearTranslationCache();
         return back()->with('success', 'Translation keyword removed.');
     }
 
@@ -214,27 +218,89 @@ class AdminController extends Controller {
     }
 
     public function banners() {
-        $keys = ['banner_1_image','banner_1_title','banner_1_subtitle','banner_1_btn_text','banner_1_btn_link',
-                 'banner_2_image','banner_2_title','banner_2_subtitle','banner_2_btn_text','banner_2_btn_link'];
+        $keys = [
+            'home_page_image',
+            'home_page_banner',
+            'about_page_image',
+            'about_page_banner',
+            'gallery_page_banner',
+            'contact_page_banner',
+            'services_page_banner',
+            'banner_1_image',
+            'banner_1_title',
+            'banner_1_subtitle',
+            'banner_1_btn_text',
+            'banner_1_btn_link',
+            'banner_2_image',
+            'banner_2_title',
+            'banner_2_subtitle',
+            'banner_2_btn_text',
+            'banner_2_btn_link',
+        ];
         $banners = [];
         foreach ($keys as $k) {
             $banners[$k] = SiteSetting::get($k);
         }
-        return view('admin.banners', compact('banners'));
+        $bannerSlots = [
+            'home_page_image' => 'Home Page Image',
+            'home_page_banner' => 'Home Page Banner',
+            'about_page_image' => 'About Us Page Image',
+            'about_page_banner' => 'About Us Page Banner',
+            'gallery_page_banner' => 'Gallery Page Banner',
+            'contact_page_banner' => 'Contact Us Page Banner',
+            'services_page_banner' => 'Services Page Banner',
+        ];
+        return view('admin.banners', compact('banners', 'bannerSlots'));
     }
 
     public function bannersUpdate(Request $request) {
+        $bannerSlots = [
+            'home_page_image',
+            'home_page_banner',
+            'about_page_image',
+            'about_page_banner',
+            'gallery_page_banner',
+            'contact_page_banner',
+            'services_page_banner',
+        ];
+
+        if ($request->filled('banner_slot')) {
+            $slot = (string) $request->input('banner_slot');
+            if (!in_array($slot, $bannerSlots, true)) {
+                return back()->with('error', 'Invalid banner slot selected.');
+            }
+
+            if ($request->boolean('delete_banner')) {
+                SiteSetting::set($slot, '');
+                return back()->with('success', 'Banner removed successfully.');
+            }
+
+            if ($request->hasFile('banner_image')) {
+                $path = $request->file('banner_image')->store('banners', 'public');
+                SiteSetting::set($slot, $path);
+                return back()->with('success', 'Banner updated successfully.');
+            }
+
+            return back()->with('error', 'Please upload an image or choose remove.');
+        }
+
         $textKeys = ['banner_1_title','banner_1_subtitle','banner_1_btn_text','banner_1_btn_link',
                      'banner_2_title','banner_2_subtitle','banner_2_btn_text','banner_2_btn_link'];
         foreach ($textKeys as $key) {
-            SiteSetting::set($key, $request->input($key, ''));
-        }
-        foreach ([1, 2] as $n) {
-            $field = "banner_{$n}_image";
-            if ($request->hasFile($field)) {
-                $path = $request->file($field)->store('banners', 'public');
-                SiteSetting::set($field, $path);
+            if ($request->has($key)) {
+                SiteSetting::set($key, $request->input($key, ''));
             }
+        }
+
+        if ($request->hasFile('banner_1_image')) {
+            $path = $request->file('banner_1_image')->store('banners', 'public');
+            SiteSetting::set('banner_1_image', $path);
+            SiteSetting::set('home_page_banner', $path);
+        }
+
+        if ($request->hasFile('banner_2_image')) {
+            $path = $request->file('banner_2_image')->store('banners', 'public');
+            SiteSetting::set('banner_2_image', $path);
         }
         return back()->with('success', 'Banners saved successfully.');
     }
